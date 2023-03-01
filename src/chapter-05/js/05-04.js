@@ -1,20 +1,20 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   // and add some simple default lights
-  var scene = new THREE.Scene();
-  var groundPlane = addLargeGroundPlane(scene)
+  let scene = new THREE.Scene();
+  let groundPlane = addLargeGroundPlane(scene)
   groundPlane.position.y = -30;
   initDefaultLighting(scene);
 
   // setup the control parts of the ui
-  var controls = new function () {
-    var self = this;
+  let controls = new function () {
+    let self = this;
     this.curveSegments = 12;
 
     // the start geometry and material. Used as the base for the settings in the control UI
@@ -31,7 +31,7 @@ function init() {
   };
 
   // create the GUI with the specific settings for this geometry
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'curveSegments', 1, 100, 1).onChange(controls.redraw);
   // add a material section, so we can switch between materials
   gui.add(controls, 'appliedMaterial', {
@@ -44,7 +44,7 @@ function init() {
 
   // initialize the first redraw so everything gets initialized
   controls.redraw();
-  var step = 0;
+  let step = 0;
   // call the render function
   render();
   function render() {
@@ -60,7 +60,7 @@ function init() {
 function drawShape() {
 
   // create a basic shape
-  var shape = new THREE.Shape();
+  let shape = new THREE.Shape();
 
   // startpoint
   shape.moveTo(10, 10);
@@ -82,17 +82,17 @@ function drawShape() {
   shape.quadraticCurveTo(20, 15, 10, 10);
 
   // add 'eye' hole one
-  var hole1 = new THREE.Path();
+  let hole1 = new THREE.Path();
   hole1.absellipse(16, 24, 2, 3, 0, Math.PI * 2, true);
   shape.holes.push(hole1);
 
   // add 'eye hole 2'
-  var hole2 = new THREE.Path();
+  let hole2 = new THREE.Path();
   hole2.absellipse(23, 24, 2, 3, 0, Math.PI * 2, true);
   shape.holes.push(hole2);
 
   // add 'mouth'
-  var hole3 = new THREE.Path();
+  let hole3 = new THREE.Path();
   hole3.absarc(20, 16, 2, 0, Math.PI, true);
   shape.holes.push(hole3);
 

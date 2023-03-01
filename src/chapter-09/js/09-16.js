@@ -1,19 +1,19 @@
 function init() {
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
-  var scene = new THREE.Scene();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
+  let scene = new THREE.Scene();
   scene.add(new THREE.AmbientLight(0x333333));
   
-  var trackballControls = initTrackballControls(camera, renderer);
+  let trackballControls = initTrackballControls(camera, renderer);
   camera.position.set(0, 0, 30);
-  var clock = new THREE.Clock();
+  let clock = new THREE.Clock();
 
-  var mixer = new THREE.AnimationMixer();
-  var clipAction
+  let mixer = new THREE.AnimationMixer();
+  let clipAction
 
-  var controls
-  var mixerControls = {
+  let controls
+  let mixerControls = {
     time: 0,
     timeScale: 1,
     stopAllAction: function() {mixer.stopAllAction()},
@@ -21,24 +21,24 @@ function init() {
   
   initDefaultLighting(scene);
   
-  var manager = new THREE.LoadingManager();
-  var textureLoader = new THREE.TextureLoader();
-  var loader = new THREE.XLoader( manager, textureLoader );
-  var animLoader = new THREE.XLoader( manager, textureLoader );
+  let manager = new THREE.LoadingManager();
+  let textureLoader = new THREE.TextureLoader();
+  let loader = new THREE.XLoader( manager, textureLoader );
+  let animLoader = new THREE.XLoader( manager, textureLoader );
 
   // we could also queue this or use promises
   loader.load(["../../assets/models/x/SSR06_model.x"], function (result) {
-    var mesh = result.models[0];
+    let mesh = result.models[0];
     animLoader.load(["../../assets/models/x/stand.x", { putPos: false, putScl: false }], function (anim) {      
       animLoader.assignAnimation(mesh);
       // at this point we've got a normal mesh, and can get the mixer and clipactio
 
       mixer = mesh.animationMixer;
       clipAction = mixer.clipAction( "stand" ).play();
-      var clip = clipAction.getClip();
+      let clip = clipAction.getClip();
 
-      var gui = new dat.GUI();
-      var mixerFolder = gui.addFolder("AnimationMixer")
+      let gui = new dat.GUI();
+      let mixerFolder = gui.addFolder("AnimationMixer")
       mixerFolder.add(mixerControls, "time").listen()
       mixerFolder.add(mixerControls, "timeScale", 0, 20).onChange(function (timeScale) {mixer.timeScale = timeScale});
       mixerFolder.add(mixerControls, "stopAllAction").listen()
@@ -54,7 +54,7 @@ function init() {
   render();
   function render() {
     stats.update();
-    var delta = clock.getDelta();
+    let delta = clock.getDelta();
     trackballControls.update(delta);
     requestAnimationFrame(render);
     renderer.render(scene, camera)

@@ -1,26 +1,26 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var webGLRenderer = initRenderer();
-  var scene = new THREE.Scene();
-  var camera = initCamera(new THREE.Vector3(20, 0, 150));
+  let stats = initStats();
+  let webGLRenderer = initRenderer();
+  let scene = new THREE.Scene();
+  let camera = initCamera(new THREE.Vector3(20, 0, 150));
   camera.lookAt(new THREE.Vector3(20, 30, 0));
 
   createSprites();
   render();
 
-  var group;
+  let group;
 
   function getTexture() {
-    var texture = new THREE.TextureLoader().load("../../assets/textures/particles/sprite-sheet.png");
+    let texture = new THREE.TextureLoader().load("../../assets/textures/particles/sprite-sheet.png");
     return texture;
   }
 
   function createSprites() {
     group = new THREE.Object3D();
-    var range = 200;
-    for (var i = 0; i < 400; i++) {
+    let range = 200;
+    for (let i = 0; i < 400; i++) {
       group.add(createSprite(10, false, 0.6, 0xffffff, i % 5, range));
     }
     scene.add(group);
@@ -28,7 +28,7 @@ function init() {
 
   function createSprite(size, transparent, opacity, color, spriteNumber, range) {
 
-    var spriteMaterial = new THREE.SpriteMaterial({
+    let spriteMaterial = new THREE.SpriteMaterial({
       opacity: opacity,
       color: color,
       transparent: transparent,
@@ -42,7 +42,7 @@ function init() {
 
     spriteMaterial.blending = THREE.AdditiveBlending;
 
-    var sprite = new THREE.Sprite(spriteMaterial);
+    let sprite = new THREE.Sprite(spriteMaterial);
     sprite.scale.set(size, size, size);
     sprite.position.set(
       Math.random() * range - range / 2,

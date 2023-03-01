@@ -1,11 +1,11 @@
 function addGeometry(scene, geom, name, texture, gui, controls) {
-  var mat = new THREE.MeshStandardMaterial(
+  let mat = new THREE.MeshStandardMaterial(
     {
       map: texture,
       metalness: 0.2,
       roughness: 0.07
   });
-  var mesh = new THREE.Mesh(geom, mat);
+  let mesh = new THREE.Mesh(geom, mat);
   mesh.castShadow = true;
   
   scene.add(mesh);
@@ -16,7 +16,7 @@ function addGeometry(scene, geom, name, texture, gui, controls) {
 };
 
 function addGeometryWithMaterial(scene, geom, name, gui, controls, material) {
-  var mesh = new THREE.Mesh(geom, material);
+  let mesh = new THREE.Mesh(geom, material);
   mesh.castShadow = true;
   
   scene.add(mesh);

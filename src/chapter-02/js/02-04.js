@@ -1,26 +1,26 @@
 function init() {
 
-    var stats = initStats();
+    let stats = initStats();
 
     // create a scene, that will hold all our elements such as objects, cameras and lights.
-    var scene = new THREE.Scene();
+    let scene = new THREE.Scene();
 
     // create a camera, which defines where we're looking at.
-    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
     // create a render and set the size
-    var renderer = new THREE.WebGLRenderer();
+    let renderer = new THREE.WebGLRenderer();
 
     renderer.setClearColor(new THREE.Color(0x000000));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
 
     // create the ground plane
-    var planeGeometry = new THREE.PlaneGeometry(60, 40, 1, 1);
-    var planeMaterial = new THREE.MeshLambertMaterial({
+    let planeGeometry = new THREE.PlaneGeometry(60, 40, 1, 1);
+    let planeMaterial = new THREE.MeshLambertMaterial({
         color: 0xffffff
     });
-    var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    let plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.receiveShadow = true;
 
     // rotate and position the plane
@@ -39,11 +39,11 @@ function init() {
     camera.lookAt(new THREE.Vector3(-10, 0, 0));
 
     // add subtle ambient lighting
-    var ambientLight = new THREE.AmbientLight(0x555555);
+    let ambientLight = new THREE.AmbientLight(0x555555);
     scene.add(ambientLight);
 
     // add spotlight for the shadows
-    var spotLight = new THREE.SpotLight(0xffffff, 1.2, 150, Math.PI / 4, 0, 2);
+    let spotLight = new THREE.SpotLight(0xffffff, 1.2, 150, Math.PI / 4, 0, 2);
     spotLight.shadow.mapSize.height = 1024;
     spotLight.shadow.mapSize.width = 1024;
     spotLight.position.set(-40, 30, 30);
@@ -57,11 +57,11 @@ function init() {
     document.getElementById("webgl-output").appendChild(renderer.domElement);
 
     // call the render function
-    var step = 0;
+    let step = 0;
 
 
     function addGeometries(scene) {
-        var geoms = [];
+        let geoms = [];
 
         geoms.push(new THREE.CylinderGeometry(1, 4, 4));
 
@@ -76,7 +76,7 @@ function init() {
         // create a convex shape (a shape without dents)
         // using a couple of points
         // for instance a cube
-        var points = [
+        let points = [
             new THREE.Vector3(2, 2, 2),
             new THREE.Vector3(2, 2, -2),
             new THREE.Vector3(-2, 2, -2),
@@ -90,10 +90,10 @@ function init() {
 
         // create a lathgeometry
         //http://en.wikipedia.org/wiki/Lathe_(graphics)
-        var pts = []; //points array - the path profile points will be stored here
-        var detail = .1; //half-circle detail - how many angle increments will be used to generate points
-        var radius = 3; //radius for half_sphere
-        for (var angle = 0.0; angle < Math.PI; angle += detail) //loop from 0.0 radians to PI (0 - 180 degrees)
+        let pts = []; //points array - the path profile points will be stored here
+        let detail = .1; //half-circle detail - how many angle increments will be used to generate points
+        let radius = 3; //radius for half_sphere
+        for (let angle = 0.0; angle < Math.PI; angle += detail) //loop from 0.0 radians to PI (0 - 180 degrees)
             pts.push(new THREE.Vector3(Math.cos(angle) * radius, 0, Math.sin(angle) * radius)); //angle/radius to x,z
         geoms.push(new THREE.LatheGeometry(pts, 12));
 
@@ -110,14 +110,14 @@ function init() {
 
         geoms.push(new THREE.TorusKnotGeometry(3, 0.5, 50, 20));
 
-        var j = 0;
-        for (var i = 0; i < geoms.length; i++) {
-            var cubeMaterial = new THREE.MeshLambertMaterial({
+        let j = 0;
+        for (let i = 0; i < geoms.length; i++) {
+            let cubeMaterial = new THREE.MeshLambertMaterial({
                 wireframe: true,
                 color: Math.random() * 0xffffff
             });
 
-            var materials = [
+            let materials = [
 
                 new THREE.MeshLambertMaterial({
                     color: Math.random() * 0xffffff
@@ -129,12 +129,12 @@ function init() {
 
             ];
 
-            var mesh = THREE.SceneUtils.createMultiMaterialObject(geoms[i], materials);
+            let mesh = THREE.SceneUtils.createMultiMaterialObject(geoms[i], materials);
             mesh.traverse(function (e) {
                 e.castShadow = true
             });
 
-            //var mesh = new THREE.Mesh(geoms[i],materials[i]);
+            //let mesh = new THREE.Mesh(geoms[i],materials[i]);
             //mesh.castShadow=true;
             mesh.position.x = -24 + ((i % 4) * 12);
             mesh.position.y = 4;
@@ -147,8 +147,8 @@ function init() {
     }
 
     
-    var trackballControls = initTrackballControls(camera, renderer);
-    var clock = new THREE.Clock();
+    let trackballControls = initTrackballControls(camera, renderer);
+    let clock = new THREE.Clock();
 
     render();
 

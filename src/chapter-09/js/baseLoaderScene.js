@@ -59,7 +59,7 @@ function BaseLoaderScene(providedCamera, shouldAddLights, shouldRotate, updateMe
    * Internal function, which adds a number of lights to the scene.
    */
   this._addLights = function () {
-    var keyLight = new THREE.SpotLight(0xffffff);
+    let keyLight = new THREE.SpotLight(0xffffff);
     keyLight.position.set(00, 80, 80);
     keyLight.intensity = 2;
     keyLight.lookAt(new THREE.Vector3(0, 15, 0));
@@ -68,13 +68,13 @@ function BaseLoaderScene(providedCamera, shouldAddLights, shouldRotate, updateMe
     keyLight.shadow.mapSize.width = 4096;
     this.scene.add(keyLight);
 
-    var backlight1 = new THREE.SpotLight(0xaaaaaa);
+    let backlight1 = new THREE.SpotLight(0xaaaaaa);
     backlight1.position.set(150, 40, -20);
     backlight1.intensity = 0.5;
     backlight1.lookAt(new THREE.Vector3(0, 15, 0));
     this.scene.add(backlight1);
 
-    var backlight2 = new THREE.SpotLight(0xaaaaaa);
+    let backlight2 = new THREE.SpotLight(0xaaaaaa);
     backlight2.position.set(-150, 40, -20);
     backlight2.intensity = 0.5;
     backlight2.lookAt(new THREE.Vector3(0, 15, 0));

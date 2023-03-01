@@ -1,21 +1,21 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var webGLRenderer = initRenderer();
-  var scene = new THREE.Scene();
-  var camera = initCamera(new THREE.Vector3(0, 40, 50));
+  let stats = initStats();
+  let webGLRenderer = initRenderer();
+  let scene = new THREE.Scene();
+  let camera = initCamera(new THREE.Vector3(0, 40, 50));
 
-  var knot = createMesh(new THREE.TorusKnotGeometry(10, 1, 64, 8, 2, 3));
+  let knot = createMesh(new THREE.TorusKnotGeometry(10, 1, 64, 8, 2, 3));
   // add the sphere to the scene
   scene.add(knot);
 
   // call the render function
-  var step = 0;
-  var loadedMesh;
+  let step = 0;
+  let loadedMesh;
 
   // setup the control gui
-  var controls = new function () {
+  let controls = new function () {
 
     // we need the first child, since it's a multimaterial
     this.radius = knot.geometry.parameters.radius;
@@ -37,7 +37,7 @@ function init() {
     };
 
     this.save = function () {
-      var result = knot.toJSON();
+      let result = knot.toJSON();
       localStorage.setItem("json", JSON.stringify(result));
       console.log(localStorage.getItem("json"));
     };
@@ -46,11 +46,11 @@ function init() {
 
       scene.remove(loadedMesh);
 
-      var json = localStorage.getItem("json");
+      let json = localStorage.getItem("json");
 
       if (json) {
-        var loadedGeometry = JSON.parse(json);
-        var loader = new THREE.ObjectLoader();
+        let loadedGeometry = JSON.parse(json);
+        let loader = new THREE.ObjectLoader();
 
         loadedMesh = loader.parse(loadedGeometry);
         loadedMesh.position.x -= 40;
@@ -59,11 +59,11 @@ function init() {
     }
   };
 
-  var gui = new dat.GUI();
-  var ioGui = gui.addFolder('Save & Load');
+  let gui = new dat.GUI();
+  let ioGui = gui.addFolder('Save & Load');
   ioGui.add(controls, 'save').onChange(controls.save);
   ioGui.add(controls, 'load').onChange(controls.load);
-  var meshGui = gui.addFolder('mesh');
+  let meshGui = gui.addFolder('mesh');
   meshGui.add(controls, 'radius', 0, 40).onChange(controls.redraw);
   meshGui.add(controls, 'tube', 0, 40).onChange(controls.redraw);
   meshGui.add(controls, 'radialSegments', 0, 400).step(1).onChange(controls.redraw);
@@ -78,7 +78,7 @@ function init() {
   function createMesh(geom) {
 
     // assign two materials
-    var meshMaterial = new THREE.MeshBasicMaterial({
+    let meshMaterial = new THREE.MeshBasicMaterial({
       vertexColors: THREE.VertexColors,
       wireframe: true,
       wireframeLinewidth: 2,
@@ -87,7 +87,7 @@ function init() {
     meshMaterial.side = THREE.DoubleSide;
 
     // create a multimaterial
-    var mesh = new THREE.Mesh(geom, meshMaterial);
+    let mesh = new THREE.Mesh(geom, meshMaterial);
     mesh.position.set(20, 0, 0)
 
     return mesh;

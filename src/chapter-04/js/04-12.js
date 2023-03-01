@@ -1,32 +1,32 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
-  var stats = initStats();
+  let stats = initStats();
 
   // add subtle ambient lighting
-  var ambientLight = new THREE.AmbientLight(0x0c0c0c);
+  let ambientLight = new THREE.AmbientLight(0x0c0c0c);
   scene.add(ambientLight);
 
   // add spotlight for the shadows
-  var spotLight = new THREE.SpotLight(0xffffff);
+  let spotLight = new THREE.SpotLight(0xffffff);
   spotLight.position.set(-40, 60, -10);
   spotLight.castShadow = true;
   scene.add(spotLight);
 
   // get the turtle
-  var points = gosper(4, 60);
+  let points = gosper(4, 60);
 
 
-  var lines = new THREE.Geometry();
-  var colors = [];
-  var i = 0;
+  let lines = new THREE.Geometry();
+  let colors = [];
+  let i = 0;
   points.forEach(function (e) {
     lines.vertices.push(new THREE.Vector3(e.x, e.z, e.y));
     colors[i] = new THREE.Color(0xffffff);
@@ -35,18 +35,18 @@ function init() {
   });
 
   lines.colors = colors;
-  var material = new THREE.LineBasicMaterial({
+  let material = new THREE.LineBasicMaterial({
     opacity: 1.0,
     linewidth: 1,
     vertexColors: THREE.VertexColors
   });
 
-  var line = new THREE.Line(lines, material);
+  let line = new THREE.Line(lines, material);
   line.position.set(25, -30, -60);
   scene.add(line);
 
   // call the render function
-  var step = 0;
+  let step = 0;
   render();
 
   function render() {
@@ -59,9 +59,9 @@ function init() {
 
   function gosper(a, b) {
 
-    var turtle = [0, 0, 0];
-    var points = [];
-    var count = 0;
+    let turtle = [0, 0, 0];
+    let points = [];
+    let count = 0;
 
     rg(a, b, turtle);
 
@@ -85,7 +85,7 @@ function init() {
       });
       //                ctx.moveTo(turtle[0], turtle[1]);
 
-      var dir = turtle[2] * (Math.PI / 180);
+      let dir = turtle[2] * (Math.PI / 180);
       turtle[0] += Math.cos(dir) * dist;
       turtle[1] += Math.sin(dir) * dist;
 

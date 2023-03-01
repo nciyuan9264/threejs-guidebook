@@ -6,8 +6,8 @@
  */
 function initStats(type) {
 
-    var panelType = (typeof type !== 'undefined' && type) && (!isNaN(type)) ? parseInt(type) : 0;
-    var stats = new Stats();
+    let panelType = (typeof type !== 'undefined' && type) && (!isNaN(type)) ? parseInt(type) : 0;
+    let stats = new Stats();
 
     stats.showPanel(panelType); // 0: fps, 1: ms, 2: mb, 3+: custom
     document.body.appendChild(stats.dom);
@@ -23,8 +23,8 @@ function initStats(type) {
  */
 function initRenderer(additionalProperties) {
 
-    var props = (typeof additionalProperties !== 'undefined' && additionalProperties) ? additionalProperties : {};
-    var renderer = new THREE.WebGLRenderer(props);
+    let props = (typeof additionalProperties !== 'undefined' && additionalProperties) ? additionalProperties : {};
+    let renderer = new THREE.WebGLRenderer(props);
     renderer.shadowMap.enabled = true;
     renderer.shadowMapSoft = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -43,7 +43,7 @@ function initRenderer(additionalProperties) {
  */
 function initCanvasRenderer() {
 
-    var canvasRenderer = new THREE.CanvasRenderer();
+    let canvasRenderer = new THREE.CanvasRenderer();
     canvasRenderer.setClearColor(new THREE.Color(0x000000));
     canvasRenderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById("webgl-output").appendChild(canvasRenderer.domElement);
@@ -57,9 +57,9 @@ function initCanvasRenderer() {
  * @param {THREE.Vector3} [initialPosition]
  */
 function initCamera(initialPosition) {
-    var position = (initialPosition !== undefined) ? initialPosition : new THREE.Vector3(-30, 40, 30);
+    let position = (initialPosition !== undefined) ? initialPosition : new THREE.Vector3(-30, 40, 30);
 
-    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.copy(position);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
@@ -67,9 +67,9 @@ function initCamera(initialPosition) {
 }
 
 function initDefaultLighting(scene, initialPosition) {
-    var position = (initialPosition !== undefined) ? initialPosition : new THREE.Vector3(-10, 30, 40);
+    let position = (initialPosition !== undefined) ? initialPosition : new THREE.Vector3(-10, 30, 40);
     
-    var spotLight = new THREE.SpotLight(0xffffff);
+    let spotLight = new THREE.SpotLight(0xffffff);
     spotLight.position.copy(position);
     spotLight.shadow.mapSize.width = 2048;
     spotLight.shadow.mapSize.height = 2048;
@@ -81,16 +81,16 @@ function initDefaultLighting(scene, initialPosition) {
 
     scene.add(spotLight);
 
-    var ambientLight = new THREE.AmbientLight(0x343434);
+    let ambientLight = new THREE.AmbientLight(0x343434);
     ambientLight.name = "ambientLight";
     scene.add(ambientLight);
     
 }
 
 function initDefaultDirectionalLighting(scene, initialPosition) {
-    var position = (initialPosition !== undefined) ? initialPosition : new THREE.Vector3(100, 200, 200);
+    let position = (initialPosition !== undefined) ? initialPosition : new THREE.Vector3(100, 200, 200);
     
-    var dirLight = new THREE.DirectionalLight(0xffffff);
+    let dirLight = new THREE.DirectionalLight(0xffffff);
     dirLight.position.copy(position);
     dirLight.shadow.mapSize.width = 2048;
     dirLight.shadow.mapSize.height = 2048;
@@ -103,7 +103,7 @@ function initDefaultDirectionalLighting(scene, initialPosition) {
 
     scene.add(dirLight);
 
-    var ambientLight = new THREE.AmbientLight(0x343434);
+    let ambientLight = new THREE.AmbientLight(0x343434);
     ambientLight.name = "ambientLight";
     scene.add(ambientLight);
     
@@ -116,7 +116,7 @@ function initDefaultDirectionalLighting(scene, initialPosition) {
  * @param {THREE.Renderer} renderer 
  */
 function initTrackballControls(camera, renderer) {
-    var trackballControls = new THREE.TrackballControls(camera, renderer.domElement);
+    let trackballControls = new THREE.TrackballControls(camera, renderer.domElement);
     trackballControls.rotateSpeed = 1.0;
     trackballControls.zoomSpeed = 1.2;
     trackballControls.panSpeed = 0.8;
@@ -136,9 +136,9 @@ function initTrackballControls(camera, renderer) {
  * @param {*} material if provided use this meshnormal material instead of creating a new material 
  *                     this material will only be used if it is a meshnormal material.
  */
-var applyMeshStandardMaterial = function(geometry, material) {
+let applyMeshStandardMaterial = function(geometry, material) {
     if (!material || material.type !== "MeshStandardMaterial")  {
-        var material = new THREE.MeshStandardMaterial({color: 0xff0000})
+        let material = new THREE.MeshStandardMaterial({color: 0xff0000})
         material.side = THREE.DoubleSide;
     } 
 
@@ -153,7 +153,7 @@ var applyMeshStandardMaterial = function(geometry, material) {
  * @param {*} material if provided use this meshnormal material instead of creating a new material 
  *                     this material will only be used if it is a meshnormal material.
  */
-var applyMeshNormalMaterial = function(geometry, material) {
+let applyMeshNormalMaterial = function(geometry, material) {
     if (!material || material.type !== "MeshNormalMaterial")  {
         material = new THREE.MeshNormalMaterial();
         material.side = THREE.DoubleSide;
@@ -170,11 +170,11 @@ var applyMeshNormalMaterial = function(geometry, material) {
 function addDefaultCubeAndSphere(scene) {
 
     // create a cube
-    var cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
-    var cubeMaterial = new THREE.MeshLambertMaterial({
+    let cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
+    let cubeMaterial = new THREE.MeshLambertMaterial({
         color: 0xff0000
     });
-    var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    let cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
     cube.castShadow = true;
 
     // position the cube
@@ -185,11 +185,11 @@ function addDefaultCubeAndSphere(scene) {
     // add the cube to the scene
     scene.add(cube);
 
-    var sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
-    var sphereMaterial = new THREE.MeshLambertMaterial({
+    let sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
+    let sphereMaterial = new THREE.MeshLambertMaterial({
         color: 0x7777ff
     });
-    var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
     // position the sphere
     sphere.position.x = 20;
@@ -213,11 +213,11 @@ function addDefaultCubeAndSphere(scene) {
  */
 function addGroundPlane(scene) {
     // create the ground plane
-    var planeGeometry = new THREE.PlaneGeometry(60, 20, 120, 120);
-    var planeMaterial = new THREE.MeshPhongMaterial({
+    let planeGeometry = new THREE.PlaneGeometry(60, 20, 120, 120);
+    let planeMaterial = new THREE.MeshPhongMaterial({
         color: 0xffffff
     });
-    var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    let plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.receiveShadow = true;
 
     // rotate and position the plane
@@ -238,21 +238,21 @@ function addGroundPlane(scene) {
  */
 function addLargeGroundPlane(scene, useTexture) {
 
-    var withTexture = (useTexture !== undefined) ? useTexture : false;
+    let withTexture = (useTexture !== undefined) ? useTexture : false;
 
     // create the ground plane
-    var planeGeometry = new THREE.PlaneGeometry(10000, 10000);
-    var planeMaterial = new THREE.MeshPhongMaterial({
+    let planeGeometry = new THREE.PlaneGeometry(10000, 10000);
+    let planeMaterial = new THREE.MeshPhongMaterial({
         color: 0xffffff
     });
     if (withTexture) {
-        var textureLoader = new THREE.TextureLoader();
+        let textureLoader = new THREE.TextureLoader();
         planeMaterial.map = textureLoader.load("../../assets/textures/general/floor-wood.jpg");
         planeMaterial.map.wrapS = THREE.RepeatWrapping; 
         planeMaterial.map.wrapT = THREE.RepeatWrapping; 
         planeMaterial.map.repeat.set(80,80)
     }
-    var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    let plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.receiveShadow = true;
 
     // rotate and position the plane
@@ -274,19 +274,19 @@ function addHouseAndTree(scene) {
     createTree(scene);
 
     function createBoundingWall(scene) {
-        var wallLeft = new THREE.CubeGeometry(70, 2, 2);
-        var wallRight = new THREE.CubeGeometry(70, 2, 2);
-        var wallTop = new THREE.CubeGeometry(2, 2, 50);
-        var wallBottom = new THREE.CubeGeometry(2, 2, 50);
+        let wallLeft = new THREE.CubeGeometry(70, 2, 2);
+        let wallRight = new THREE.CubeGeometry(70, 2, 2);
+        let wallTop = new THREE.CubeGeometry(2, 2, 50);
+        let wallBottom = new THREE.CubeGeometry(2, 2, 50);
 
-        var wallMaterial = new THREE.MeshPhongMaterial({
+        let wallMaterial = new THREE.MeshPhongMaterial({
             color: 0xa0522d
         });
 
-        var wallLeftMesh = new THREE.Mesh(wallLeft, wallMaterial);
-        var wallRightMesh = new THREE.Mesh(wallRight, wallMaterial);
-        var wallTopMesh = new THREE.Mesh(wallTop, wallMaterial);
-        var wallBottomMesh = new THREE.Mesh(wallBottom, wallMaterial);
+        let wallLeftMesh = new THREE.Mesh(wallLeft, wallMaterial);
+        let wallRightMesh = new THREE.Mesh(wallRight, wallMaterial);
+        let wallTopMesh = new THREE.Mesh(wallTop, wallMaterial);
+        let wallBottomMesh = new THREE.Mesh(wallBottom, wallMaterial);
 
         wallLeftMesh.position.set(15, 1, -25);
         wallRightMesh.position.set(15, 1, 25);
@@ -302,11 +302,11 @@ function addHouseAndTree(scene) {
 
     function createGroundPlane(scene) {
         // create the ground plane
-        var planeGeometry = new THREE.PlaneGeometry(70, 50);
-        var planeMaterial = new THREE.MeshPhongMaterial({
+        let planeGeometry = new THREE.PlaneGeometry(70, 50);
+        let planeMaterial = new THREE.MeshPhongMaterial({
             color: 0x9acd32
         });
-        var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        let plane = new THREE.Mesh(planeGeometry, planeMaterial);
         plane.receiveShadow = true;
 
         // rotate and position the plane
@@ -319,14 +319,14 @@ function addHouseAndTree(scene) {
     }
 
     function createHouse(scene) {
-        var roof = new THREE.ConeGeometry(5, 4);
-        var base = new THREE.CylinderGeometry(5, 5, 6);
+        let roof = new THREE.ConeGeometry(5, 4);
+        let base = new THREE.CylinderGeometry(5, 5, 6);
 
         // create the mesh
-        var roofMesh = new THREE.Mesh(roof, new THREE.MeshPhongMaterial({
+        let roofMesh = new THREE.Mesh(roof, new THREE.MeshPhongMaterial({
             color: 0x8b7213
         }));
-        var baseMesh = new THREE.Mesh(base, new THREE.MeshPhongMaterial({
+        let baseMesh = new THREE.Mesh(base, new THREE.MeshPhongMaterial({
             color: 0xffe4c4
         }));
 
@@ -347,14 +347,14 @@ function addHouseAndTree(scene) {
      * @param scene The scene to add the tree to
      */
     function createTree(scene) {
-        var trunk = new THREE.CubeGeometry(1, 8, 1);
-        var leaves = new THREE.SphereGeometry(4);
+        let trunk = new THREE.CubeGeometry(1, 8, 1);
+        let leaves = new THREE.SphereGeometry(4);
 
         // create the mesh
-        var trunkMesh = new THREE.Mesh(trunk, new THREE.MeshPhongMaterial({
+        let trunkMesh = new THREE.Mesh(trunk, new THREE.MeshPhongMaterial({
             color: 0x8b4513
         }));
-        var leavesMesh = new THREE.Mesh(leaves, new THREE.MeshPhongMaterial({
+        let leavesMesh = new THREE.Mesh(leaves, new THREE.MeshPhongMaterial({
             color: 0x00ff00
         }));
 
@@ -373,11 +373,11 @@ function addHouseAndTree(scene) {
 }
 
 function createGhostTexture() {
-    var canvas = document.createElement('canvas');
+    let canvas = document.createElement('canvas');
     canvas.width = 32;
     canvas.height = 32;
 
-    var ctx = canvas.getContext('2d');
+    let ctx = canvas.getContext('2d');
     // the body
     ctx.translate(-81, -84);
 
@@ -421,7 +421,7 @@ function createGhostTexture() {
     ctx.fill();
 
 
-    var texture = new THREE.Texture(canvas);
+    let texture = new THREE.Texture(canvas);
     texture.needsUpdate = true;
     return texture;
 };
@@ -437,11 +437,11 @@ function createGhostTexture() {
  */
 function addBasicMaterialSettings(gui, controls, material, name) {
 
-    var folderName = (name !== undefined) ? name : 'THREE.Material';
+    let folderName = (name !== undefined) ? name : 'THREE.Material';
 
     controls.material = material;
 
-    var folder = gui.addFolder(folderName);
+    let folder = gui.addFolder(folderName);
     folder.add(controls.material, 'id');
     folder.add(controls.material, 'uuid');
     folder.add(controls.material, 'name');
@@ -472,8 +472,8 @@ function addBasicMaterialSettings(gui, controls, material, name) {
 function addSpecificMaterialSettings(gui, controls, material, name) {
     controls.material = material;
     
-    var folderName = (name !== undefined) ? name : 'THREE.' + material.type;
-    var folder = gui.addFolder(folderName);
+    let folderName = (name !== undefined) ? name : 'THREE.' + material.type;
+    let folder = gui.addFolder(folderName);
     switch (material.type) {
         case "MeshNormalMaterial":
             folder.add(controls.material,'wireframe');
@@ -508,7 +508,7 @@ function redrawGeometryAndUpdateUI(gui, scene, controls, geomFunction) {
     guiRemoveFolder(gui, controls.specificMaterialFolder);
     guiRemoveFolder(gui, controls.currentMaterialFolder);
     if (controls.mesh) scene.remove(controls.mesh)
-    var changeMat = eval("(" + controls.appliedMaterial + ")")
+    let changeMat = eval("(" + controls.appliedMaterial + ")")
     if (controls.mesh) {
         controls.mesh = changeMat(geomFunction(), controls.mesh.material);
     } else {
@@ -544,13 +544,13 @@ function guiRemoveFolder(gui, folder) {
  * @param material material for the meshes
  */
 function addMeshSelection(gui, controls, material, scene) {
-  var sphereGeometry = new THREE.SphereGeometry(10, 20, 20);
-  var cubeGeometry = new THREE.BoxGeometry(16, 16, 15);
-  var planeGeometry = new THREE.PlaneGeometry(14, 14, 4, 4);
+  let sphereGeometry = new THREE.SphereGeometry(10, 20, 20);
+  let cubeGeometry = new THREE.BoxGeometry(16, 16, 15);
+  let planeGeometry = new THREE.PlaneGeometry(14, 14, 4, 4);
 
-  var sphere = new THREE.Mesh(sphereGeometry, material);
-  var cube = new THREE.Mesh(cubeGeometry, material);
-  var plane = new THREE.Mesh(planeGeometry, material);
+  let sphere = new THREE.Mesh(sphereGeometry, material);
+  let cube = new THREE.Mesh(cubeGeometry, material);
+  let plane = new THREE.Mesh(planeGeometry, material);
 
   sphere.position.x = 0;
   sphere.position.y = 11;
@@ -603,9 +603,9 @@ function addMeshSelection(gui, controls, material, scene) {
  * @returns promise which is fullfilled once the goher is loaded
  */
 function loadGopher(material) {
-    var loader = new THREE.OBJLoader();
-    var mesh = null;
-    var p = new Promise(function(resolve) {
+    let loader = new THREE.OBJLoader();
+    let mesh = null;
+    let p = new Promise(function(resolve) {
         loader.load('../../assets/models/gopher/gopher.obj', function (loadedMesh) {
             // this is a group of meshes, so iterate until we reach a THREE.Mesh
             mesh = loadedMesh;
@@ -631,7 +631,7 @@ function setMaterialGroup(material, group) {
 
 function computeNormalsGroup(group) {
     if (group instanceof THREE.Mesh) {
-        var tempGeom = new THREE.Geometry();
+        let tempGeom = new THREE.Geometry();
         tempGeom.fromBufferGeometry(group.geometry)
         tempGeom.computeFaceNormals();
         tempGeom.mergeVertices();

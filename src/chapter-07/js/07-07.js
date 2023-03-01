@@ -1,16 +1,16 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var scene = new THREE.Scene();
-  var camera = initCamera(new THREE.Vector3(20, 40, 110));
+  let stats = initStats();
+  let renderer = initRenderer();
+  let scene = new THREE.Scene();
+  let camera = initCamera(new THREE.Vector3(20, 40, 110));
   camera.lookAt(new THREE.Vector3(20, 30, 0));
 
-  var system1;
-  var cloud;
+  let system1;
+  let cloud;
 
-  var controls = new function () {
+  let controls = new function () {
     this.size = 3;
     this.transparent = true;
     this.opacity = 0.6;
@@ -26,7 +26,7 @@ function init() {
     };
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'size', 0, 20).onChange(controls.redraw);
   gui.add(controls, 'transparent').onChange(controls.redraw);
   gui.add(controls, 'opacity', 0, 1).onChange(controls.redraw);
@@ -39,10 +39,10 @@ function init() {
   function createPointCloud(size, transparent, opacity, sizeAttenuation, color) {
 
 
-    var texture = new THREE.TextureLoader().load("../../assets/textures/particles/raindrop-3.png");
-    var geom = new THREE.Geometry();
+    let texture = new THREE.TextureLoader().load("../../assets/textures/particles/raindrop-3.png");
+    let geom = new THREE.Geometry();
 
-    var material = new THREE.PointsMaterial({
+    let material = new THREE.PointsMaterial({
       size: size,
       transparent: transparent,
       opacity: opacity,
@@ -53,9 +53,9 @@ function init() {
     });
 
 
-    var range = 40;
-    for (var i = 0; i < 1500; i++) {
-      var particle = new THREE.Vector3(
+    let range = 40;
+    for (let i = 0; i < 1500; i++) {
+      let particle = new THREE.Vector3(
         Math.random() * range - range / 2,
         Math.random() * range * 1.5,
         // Math.random() * range - range / 2
@@ -75,7 +75,7 @@ function init() {
 
   function render() {
     stats.update();
-    var vertices = cloud.geometry.vertices;
+    let vertices = cloud.geometry.vertices;
     vertices.forEach(function (v) {
       v.y = v.y - (v.velocityY);
       v.x = v.x - (v.velocityX);

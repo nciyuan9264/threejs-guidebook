@@ -1,14 +1,14 @@
 function init() {
 
   // setup the scene for rendering
-  var camera = initCamera(new THREE.Vector3(50, 50, 50));
-  var loaderScene = new BaseLoaderScene(camera);
+  let camera = initCamera(new THREE.Vector3(50, 50, 50));
+  let loaderScene = new BaseLoaderScene(camera);
   camera.lookAt(new THREE.Vector3(0, 15, 0));
 
-  var loader = new THREE.OBJLoader();
+  let loader = new THREE.OBJLoader();
   loader.load('../../assets/models/pinecone/pinecone.obj', function (mesh) {
 
-    var material = new THREE.MeshLambertMaterial({
+    let material = new THREE.MeshLambertMaterial({
       color: 0x5C3A21
     });
 

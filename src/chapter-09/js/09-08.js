@@ -1,27 +1,27 @@
 function init() {
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
-  var scene = new THREE.Scene();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
+  let scene = new THREE.Scene();
   scene.add(new THREE.AmbientLight(0x333333));
   
   camera.position.set(0, 15, 70);
 
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
-  var mixer = new THREE.AnimationMixer();
-  var clipAction
-  var frameMesh
-  var mesh
+  let mixer = new THREE.AnimationMixer();
+  let clipAction
+  let frameMesh
+  let mesh
   
   initDefaultLighting(scene);
-  var loader = new THREE.JSONLoader();
+  let loader = new THREE.JSONLoader();
   loader.load('../../assets/models/horse/horse.js', function (geometry, mat) {
       geometry.computeVertexNormals();
       geometry.computeMorphNormals();
 
-      var mat = new THREE.MeshLambertMaterial({morphTargets: true, vertexColors: THREE.FaceColors});
+      let mat = new THREE.MeshLambertMaterial({morphTargets: true, vertexColors: THREE.FaceColors});
       mesh = new THREE.Mesh(geometry, mat);
       mesh.scale.set(0.15,0.15,0.15);
       mesh.translateY(-10);
@@ -29,7 +29,7 @@ function init() {
 
       mixer = new THREE.AnimationMixer( mesh );
       // or create a custom clip from the set of morphtargets
-      // var clip = THREE.AnimationClip.CreateFromMorphTargetSequence( 'gallop', geometry.morphTargets, 30 );
+      // let clip = THREE.AnimationClip.CreateFromMorphTargetSequence( 'gallop', geometry.morphTargets, 30 );
       animationClip = geometry.animations[0] 
       clipAction = mixer.clipAction( animationClip ).play();    
       
@@ -40,7 +40,7 @@ function init() {
       enableControls()
   })
 
-  var controls = {
+  let controls = {
     keyframe: 0,
     time: 0,
     timeScale: 1,
@@ -60,12 +60,12 @@ function init() {
   }
   // control which keyframe to show
   function enableControls() {
-    var gui = new dat.GUI();
-    var mixerFolder = gui.addFolder("AnimationMixer")
+    let gui = new dat.GUI();
+    let mixerFolder = gui.addFolder("AnimationMixer")
     mixerFolder.add(controls, "time").listen()
     mixerFolder.add(controls, "timeScale", 0, 5).onChange(function (timeScale) {mixer.timeScale = timeScale});
     mixerFolder.add(controls, "stopAllAction").listen()
-    var actionFolder = gui.addFolder("AnimationAction")
+    let actionFolder = gui.addFolder("AnimationAction")
     actionFolder.add(clipAction, "clampWhenFinished").listen();
     actionFolder.add(clipAction, "enabled").listen();
     actionFolder.add(clipAction, "paused").listen();
@@ -112,7 +112,7 @@ function init() {
   function showFrame(frame) {
     if (mesh) {
       scene.remove(frameMesh);
-      var newVertices = mesh.geometry.morphTargets[frame].vertices
+      let newVertices = mesh.geometry.morphTargets[frame].vertices
       frameMesh = mesh.clone();
       frameMesh.geometry.vertices = newVertices;
       frameMesh.translateX(-30);
@@ -124,7 +124,7 @@ function init() {
   render();
   function render() {
     stats.update();
-    var delta = clock.getDelta();
+    let delta = clock.getDelta();
     trackballControls.update(delta);
     requestAnimationFrame(render);
     renderer.render(scene, camera)

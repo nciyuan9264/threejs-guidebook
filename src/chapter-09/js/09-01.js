@@ -1,21 +1,21 @@
 function init() {
-    var stats = initStats();
-    var renderer = initRenderer();
-    var camera = initCamera();
-    var scene = new THREE.Scene();
+    let stats = initStats();
+    let renderer = initRenderer();
+    let camera = initCamera();
+    let scene = new THREE.Scene();
 
-    var trackballControls = initTrackballControls(camera, renderer);
-    var clock = new THREE.Clock();
+    let trackballControls = initTrackballControls(camera, renderer);
+    let clock = new THREE.Clock();
   
     initDefaultLighting(scene);  
 
-    var groundPlane = addGroundPlane(scene)
+    let groundPlane = addGroundPlane(scene)
     groundPlane.position.y = 0;
 
     // create a cube
-    var cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
-    var cubeMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
-    var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    let cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
+    let cubeMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+    let cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
     cube.castShadow = true;
 
     // position the cube
@@ -26,9 +26,9 @@ function init() {
     // add the cube to the scene
     scene.add(cube);
 
-    var sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
-    var sphereMaterial = new THREE.MeshStandardMaterial({ color: 0x7777ff });
-    var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    let sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
+    let sphereMaterial = new THREE.MeshStandardMaterial({ color: 0x7777ff });
+    let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
     // position the sphere
     sphere.position.x = 20;
@@ -39,9 +39,9 @@ function init() {
     scene.add(sphere);
 
 
-    var cylinderGeometry = new THREE.CylinderGeometry(2, 2, 20);
-    var cylinderMaterial = new THREE.MeshStandardMaterial({color: 0x77ff77});
-    var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+    let cylinderGeometry = new THREE.CylinderGeometry(2, 2, 20);
+    let cylinderMaterial = new THREE.MeshStandardMaterial({color: 0x77ff77});
+    let cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
     cylinder.castShadow = true;
     cylinder.position.set(0, 0, 1);
 
@@ -55,30 +55,30 @@ function init() {
     camera.lookAt(scene.position);
 
     // add subtle ambient lighting
-    var ambienLight = new THREE.AmbientLight(0x353535);
+    let ambienLight = new THREE.AmbientLight(0x353535);
     scene.add(ambienLight);
 
     // add the output of the renderer to the html element
     document.getElementById("webgl-output").appendChild(renderer.domElement);
 
     // call the render function
-    var step = 0;
+    let step = 0;
 
-    var controls = new function () {
+    let controls = new function () {
         this.rotationSpeed = 0.02;
         this.bouncingSpeed = 0.03;
         this.scalingSpeed = 0.03;
     };
 
-    var gui = new dat.GUI();
+    let gui = new dat.GUI();
     gui.add(controls, 'rotationSpeed', 0, 0.5);
     gui.add(controls, 'bouncingSpeed', 0, 0.5);
     gui.add(controls, 'scalingSpeed', 0, 0.5);
 
 
     renderScene();
-    var step = 0;
-    var scalingStep = 0;
+    let step = 0;
+    let scalingStep = 0;
 
     function renderScene() {
         stats.update();
@@ -95,9 +95,9 @@ function init() {
 
         // scale the cylinder
         scalingStep += controls.scalingSpeed;
-        var scaleX = Math.abs(Math.sin(scalingStep / 4));
-        var scaleY = Math.abs(Math.cos(scalingStep / 5));
-        var scaleZ = Math.abs(Math.sin(scalingStep / 7));
+        let scaleX = Math.abs(Math.sin(scalingStep / 4));
+        let scaleY = Math.abs(Math.cos(scalingStep / 5));
+        let scaleZ = Math.abs(Math.sin(scalingStep / 7));
         cylinder.scale.set(scaleX, scaleY, scaleZ);
 
         // render using requestAnimationFrame

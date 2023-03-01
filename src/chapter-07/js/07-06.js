@@ -1,22 +1,22 @@
 function init() {
 
-  var stats = initStats();
-  var camera = initCamera(new THREE.Vector3(20, 0, 150));
-  var scene = new THREE.Scene();
-  var webGLRenderer = initRenderer();
+  let stats = initStats();
+  let camera = initCamera(new THREE.Vector3(20, 0, 150));
+  let scene = new THREE.Scene();
+  let webGLRenderer = initRenderer();
 
   createSprites();
   render();
 
   function createSprites() {
-    var material = new THREE.SpriteMaterial({
+    let material = new THREE.SpriteMaterial({
       map: createGhostTexture(),
       color: 0xffffff
     });
 
-    var range = 500;
-    for (var i = 0; i < 1500; i++) {
-      var sprite = new THREE.Sprite(material);
+    let range = 500;
+    for (let i = 0; i < 1500; i++) {
+      let sprite = new THREE.Sprite(material);
       sprite.position.set(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() *
         range - range / 2);
       sprite.scale.set(4, 4, 4);
@@ -24,7 +24,7 @@ function init() {
     }
   }
 
-  var step = 0;
+  let step = 0;
 
   function render() {
     stats.update();

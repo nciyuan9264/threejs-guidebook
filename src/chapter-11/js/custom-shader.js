@@ -13,7 +13,7 @@ THREE.CustomGrayScaleShader = {
   // vertexshader is always the same for postprocessing steps
   vertexShader: [
 
-      "varying vec2 vUv;",
+      "letying vec2 vUv;",
 
       "void main() {",
 
@@ -35,7 +35,7 @@ THREE.CustomGrayScaleShader = {
       "uniform sampler2D tDiffuse;",
 
       // used to determine the correct texel we're working on
-      "varying vec2 vUv;",
+      "letying vec2 vUv;",
 
       // executed, in parallel, for each pixel
       "void main() {",
@@ -66,7 +66,7 @@ THREE.CustomBitShader = {
 
   vertexShader: [
 
-      "varying vec2 vUv;",
+      "letying vec2 vUv;",
 
       "void main() {",
 
@@ -83,7 +83,7 @@ THREE.CustomBitShader = {
 
       "uniform sampler2D tDiffuse;",
 
-      "varying vec2 vUv;",
+      "letying vec2 vUv;",
 
       "void main() {",
 

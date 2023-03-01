@@ -1,28 +1,28 @@
 function init() {
 
-  var stats = initStats();
-  var renderer = initRenderer({
+  let stats = initStats();
+  let renderer = initRenderer({
     antialias: true
   });
-  var camera = initCamera();
+  let camera = initCamera();
   
   camera.position.set(-50, 30, 50)
   // camera.lookAt(new THREE.Vector3(0, 0, -35));
 
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
   // create the ground plane
-  var planeGeometry = new THREE.PlaneGeometry(70, 70, 1, 1);
-  var planeMaterial = new THREE.MeshStandardMaterial({
+  let planeGeometry = new THREE.PlaneGeometry(70, 70, 1, 1);
+  let planeMaterial = new THREE.MeshStandardMaterial({
     roughness: 0.044676705160855, // calculated from shininess = 1000
     metalness: 0.0
 
   });
-  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  let plane = new THREE.Mesh(planeGeometry, planeMaterial);
   // plane.receiveShadow  = true;
 
   // rotate and position the plane
@@ -35,54 +35,54 @@ function init() {
   scene.add(plane);
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
-  var spotLight0 = new THREE.SpotLight(0xcccccc);
+  let spotLight0 = new THREE.SpotLight(0xcccccc);
   spotLight0.position.set(-40, 60, -10);
   spotLight0.intensity = 0.1;
   spotLight0.lookAt(plane);
   scene.add(spotLight0);
 
-  var areaLight1 = new THREE.RectAreaLight(0xff0000, 500, 4, 10);
+  let areaLight1 = new THREE.RectAreaLight(0xff0000, 500, 4, 10);
   areaLight1.position.set(-10, 10, -35);
   scene.add(areaLight1);
 
-  var areaLight2 = new THREE.RectAreaLight(0x00ff00, 500, 4, 10);
+  let areaLight2 = new THREE.RectAreaLight(0x00ff00, 500, 4, 10);
   areaLight2.position.set(0, 10, -35);
   scene.add(areaLight2);
 
-  var areaLight3 = new THREE.RectAreaLight(0x0000ff, 500, 4, 10);
+  let areaLight3 = new THREE.RectAreaLight(0x0000ff, 500, 4, 10);
   areaLight3.position.set(10, 10, -35);
   scene.add(areaLight3);
 
-  var planeGeometry1 = new THREE.BoxGeometry(4, 10, 0);
-  var planeGeometry1Mat = new THREE.MeshBasicMaterial({
+  let planeGeometry1 = new THREE.BoxGeometry(4, 10, 0);
+  let planeGeometry1Mat = new THREE.MeshBasicMaterial({
     color: 0xff0000
   });
-  var plane1 = new THREE.Mesh(planeGeometry1, planeGeometry1Mat);
+  let plane1 = new THREE.Mesh(planeGeometry1, planeGeometry1Mat);
   plane1.position.copy(areaLight1.position);
   scene.add(plane1);
 
-  var planeGeometry2 = new THREE.BoxGeometry(4, 10, 0);
-  var planeGeometry2Mat = new THREE.MeshBasicMaterial({
+  let planeGeometry2 = new THREE.BoxGeometry(4, 10, 0);
+  let planeGeometry2Mat = new THREE.MeshBasicMaterial({
     color: 0x00ff00,
   });
-  var plane2 = new THREE.Mesh(planeGeometry2, planeGeometry2Mat);
+  let plane2 = new THREE.Mesh(planeGeometry2, planeGeometry2Mat);
 
   plane2.position.copy(areaLight2.position);
   scene.add(plane2);
 
-  var planeGeometry3 = new THREE.BoxGeometry(4, 10, 0);
-  var planeGeometry3Mat = new THREE.MeshBasicMaterial({
+  let planeGeometry3 = new THREE.BoxGeometry(4, 10, 0);
+  let planeGeometry3Mat = new THREE.MeshBasicMaterial({
     color: 0x0000ff
   });
-  var plane3 = new THREE.Mesh(planeGeometry3, planeGeometry3Mat);
+  let plane3 = new THREE.Mesh(planeGeometry3, planeGeometry3Mat);
 
   plane3.position.copy(areaLight3.position);
   scene.add(plane3);
 
 
-  var controls = new function () {
+  let controls = new function () {
     this.rotationSpeed = 0.02;
     this.color1 = 0xff0000;
     this.intensity1 = 500;
@@ -92,7 +92,7 @@ function init() {
     this.intensity3 = 500;
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.addColor(controls, 'color1').onChange(function (e) {
     areaLight1.color = new THREE.Color(e);
     planeGeometry1Mat.color = new THREE.Color(e);

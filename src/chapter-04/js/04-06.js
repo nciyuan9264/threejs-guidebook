@@ -1,37 +1,37 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
-  var groundGeom = new THREE.PlaneGeometry(100, 100, 4, 4);
-  var groundMesh = new THREE.Mesh(groundGeom, new THREE.MeshBasicMaterial({
+  let groundGeom = new THREE.PlaneGeometry(100, 100, 4, 4);
+  let groundMesh = new THREE.Mesh(groundGeom, new THREE.MeshBasicMaterial({
     color: 0x555555
   }));
   groundMesh.rotation.x = -Math.PI / 2;
   groundMesh.position.y = -20;
   scene.add(groundMesh);
 
-  var sphereGeometry = new THREE.SphereGeometry(14, 20, 20);
-  var cubeGeometry = new THREE.BoxGeometry(15, 15, 15);
-  var planeGeometry = new THREE.PlaneGeometry(14, 14, 4, 4);
+  let sphereGeometry = new THREE.SphereGeometry(14, 20, 20);
+  let cubeGeometry = new THREE.BoxGeometry(15, 15, 15);
+  let planeGeometry = new THREE.PlaneGeometry(14, 14, 4, 4);
 
 
-  var meshMaterial = new THREE.MeshLambertMaterial({
+  let meshMaterial = new THREE.MeshLambertMaterial({
     color: 0x7777ff
   });
-  var sphere = new THREE.Mesh(sphereGeometry, meshMaterial);
-  var cube = new THREE.Mesh(cubeGeometry, meshMaterial);
-  var plane = new THREE.Mesh(planeGeometry, meshMaterial);
+  let sphere = new THREE.Mesh(sphereGeometry, meshMaterial);
+  let cube = new THREE.Mesh(cubeGeometry, meshMaterial);
+  let plane = new THREE.Mesh(planeGeometry, meshMaterial);
 
-  var selectedMesh = cube;
+  let selectedMesh = cube;
 
   // position the sphere
   sphere.position.x = 0;
@@ -45,19 +45,19 @@ function init() {
   scene.add(cube);
 
   // add subtle ambient lighting
-  var ambientLight = new THREE.AmbientLight(0x0c0c0c);
+  let ambientLight = new THREE.AmbientLight(0x0c0c0c);
   scene.add(ambientLight);
 
   // add spotlight for the shadows
-  var spotLight = new THREE.SpotLight(0xffffff);
+  let spotLight = new THREE.SpotLight(0xffffff);
   spotLight.position.set(-30, 60, 60);
   spotLight.castShadow = true;
   scene.add(spotLight);
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
-  var controls = new function () {
+  let controls = new function () {
     this.rotationSpeed = 0.02;
     this.bouncingSpeed = 0.03;
 
@@ -79,9 +79,9 @@ function init() {
     this.selectedMesh = "cube";
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   addBasicMaterialSettings(gui, controls, meshMaterial);
-  var spGui = gui.addFolder("THREE.MeshLambertMaterial");
+  let spGui = gui.addFolder("THREE.MeshLambertMaterial");
   spGui.addColor(controls, 'color').onChange(function (e) {
     meshMaterial.color.setStyle(e)
   });

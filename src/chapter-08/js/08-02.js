@@ -1,21 +1,21 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var scene = new THREE.Scene();
-  var camera = initCamera(new THREE.Vector3(0, 40, 50));
+  let stats = initStats();
+  let renderer = initRenderer();
+  let scene = new THREE.Scene();
+  let camera = initCamera(new THREE.Vector3(0, 40, 50));
 
   camera.lookAt(scene.position);
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
-  var cubeMaterial = new THREE.MeshNormalMaterial({
+  let cubeMaterial = new THREE.MeshNormalMaterial({
     transparent: true,
     opacity: 0.5
   });
-  var controls = new function () {
+  let controls = new function () {
     this.cameraNear = camera.near;
     this.cameraFar = camera.far;
     this.rotationSpeed = 0.02;
@@ -25,7 +25,7 @@ function init() {
     this.numberOfObjects = 500;
 
     this.redraw = function () {
-      var toRemove = [];
+      let toRemove = [];
       scene.traverse(function (e) {
         if (e instanceof THREE.Mesh) toRemove.push(e);
       });
@@ -35,16 +35,16 @@ function init() {
 
       // add a large number of cubes
       if (controls.combined) {
-        var geometry = new THREE.Geometry();
-        for (var i = 0; i < controls.numberOfObjects; i++) {
-          var cubeMesh = addcube();
+        let geometry = new THREE.Geometry();
+        for (let i = 0; i < controls.numberOfObjects; i++) {
+          let cubeMesh = addcube();
           cubeMesh.updateMatrix();
           geometry.merge(cubeMesh.geometry, cubeMesh.matrix);
         }
         scene.add(new THREE.Mesh(geometry, cubeMaterial));
 
       } else {
-        for (var i = 0; i < controls.numberOfObjects; i++) {
+        for (let i = 0; i < controls.numberOfObjects; i++) {
           scene.add(controls.addCube());
         }
       }
@@ -58,7 +58,7 @@ function init() {
     }
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
 
   gui.add(controls, 'numberOfObjects', 0, 20000);
   gui.add(controls, 'combined').onChange(controls.redraw);
@@ -69,14 +69,14 @@ function init() {
 
   render();
 
-  var rotation = 0;
+  let rotation = 0;
 
   function addcube() {
 
-    var cubeSize = 1.0;
-    var cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+    let cubeSize = 1.0;
+    let cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
 
-    var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    let cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
     cube.castShadow = true;
 
     // position the cube randomly in the scene

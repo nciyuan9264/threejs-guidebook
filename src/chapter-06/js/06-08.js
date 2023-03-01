@@ -1,20 +1,20 @@
 function init() {
 
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
-  var scene = new THREE.Scene();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
+  let scene = new THREE.Scene();
   initDefaultLighting(scene);
-  var groundPlane = addLargeGroundPlane(scene)
+  let groundPlane = addLargeGroundPlane(scene)
   groundPlane.position.y = -30;
 
-  var sphere1 = createMesh(new THREE.SphereGeometry(5, 20, 30));
+  let sphere1 = createMesh(new THREE.SphereGeometry(5, 20, 30));
   sphere1.position.x = -2;
-  var sphere2 = createMesh(new THREE.SphereGeometry(5, 20, 30));
+  let sphere2 = createMesh(new THREE.SphereGeometry(5, 20, 30));
   sphere2.position.set(3, 0, 0);
-  var cube = createMesh(new THREE.BoxGeometry(5, 5, 5));
+  let cube = createMesh(new THREE.BoxGeometry(5, 5, 5));
   cube.position.x = -7;
-  var result;
+  let result;
 
   // add the sphere to the scene
   scene.add(sphere1);
@@ -28,10 +28,10 @@ function init() {
   camera.lookAt(new THREE.Vector3(0, 0, 0));
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
   // setup the control gui
-  var controls = new function () {
+  let controls = new function () {
 
     this.sphere1PosX = sphere1.position.x;
     this.sphere1PosY = sphere1.position.y;
@@ -61,8 +61,8 @@ function init() {
     this.rotateResult = false;
   };
 
-  var gui = new dat.GUI();
-  var guiSphere1 = gui.addFolder("Sphere1");
+  let gui = new dat.GUI();
+  let guiSphere1 = gui.addFolder("Sphere1");
   guiSphere1.add(controls, "sphere1PosX", -15, 15).onChange(function () {
     sphere1.position.set(controls.sphere1PosX, controls.sphere1PosY, controls.sphere1PosZ)
   });
@@ -76,7 +76,7 @@ function init() {
     sphere1.scale.set(e, e, e)
   });
 
-  var guiSphere2 = gui.addFolder("Sphere2");
+  let guiSphere2 = gui.addFolder("Sphere2");
   guiSphere2.add(controls, "sphere2PosX", -15, 15).onChange(function () {
     sphere2.position.set(controls.sphere2PosX, controls.sphere2PosY, controls.sphere2PosZ)
   });
@@ -91,7 +91,7 @@ function init() {
   });
   guiSphere2.add(controls, "actionSphere", ["subtract", "intersect", "union", "none"]);
 
-  var guiCube = gui.addFolder("cube");
+  let guiCube = gui.addFolder("cube");
   guiCube.add(controls, "cubePosX", -15, 15).onChange(function () {
     cube.position.set(controls.cubePosX, controls.cubePosY, controls.cubePosZ)
   });
@@ -128,7 +128,7 @@ function init() {
 
   render();
 
-  var spinner;
+  let spinner;
 
   function redrawResult() {
 
@@ -136,11 +136,11 @@ function init() {
     // to set timeout > 1, if not executed immediately.
     setTimeout(function () {
       scene.remove(result);
-      var sphere1BSP = new ThreeBSP(sphere1);
-      var sphere2BSP = new ThreeBSP(sphere2);
-      var cube2BSP = new ThreeBSP(cube);
+      let sphere1BSP = new ThreeBSP(sphere1);
+      let sphere2BSP = new ThreeBSP(sphere2);
+      let cube2BSP = new ThreeBSP(cube);
 
-      var resultBSP;
+      let resultBSP;
 
 
       // first do the sphere
@@ -188,9 +188,9 @@ function init() {
   function createMesh(geom) {
 
     // assign two materials
-    var meshMaterial = new THREE.MeshNormalMaterial();
+    let meshMaterial = new THREE.MeshNormalMaterial();
     meshMaterial.side = THREE.DoubleSide;
-    var wireFrameMat = new THREE.MeshBasicMaterial({
+    let wireFrameMat = new THREE.MeshBasicMaterial({
       transparency: true,
       opacity: 0.5,
       wireframeLinewidth: 0.5
@@ -198,7 +198,7 @@ function init() {
     wireFrameMat.wireframe = true;
 
     // create a multimaterial
-    var mesh = new THREE.Mesh(geom, wireFrameMat);
+    let mesh = new THREE.Mesh(geom, wireFrameMat);
 
     return mesh;
   }

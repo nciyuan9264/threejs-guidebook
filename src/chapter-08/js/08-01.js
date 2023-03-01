@@ -1,24 +1,24 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var webGLRenderer = initRenderer();
-  var scene = new THREE.Scene();
-  var camera = initCamera(new THREE.Vector3(30, 30, 30));
+  let stats = initStats();
+  let webGLRenderer = initRenderer();
+  let scene = new THREE.Scene();
+  let camera = initCamera(new THREE.Vector3(30, 30, 30));
   initDefaultLighting(scene);
-  var groundPlane = addLargeGroundPlane(scene)
+  let groundPlane = addLargeGroundPlane(scene)
 
   // call the render function
-  var step = 0.03;
+  let step = 0.03;
 
-  var sphere;
-  var cube;
-  var group;
-  var bboxMesh;
-  var arrow;
+  let sphere;
+  let cube;
+  let group;
+  let bboxMesh;
+  let arrow;
 
   // setup the control gui
-  var controls = new function () {
+  let controls = new function () {
     // we need the first child, since it's a multimaterial
     this.cubePosX = 0;
     this.cubePosY = 3;
@@ -70,12 +70,12 @@ function init() {
 
     this.positionBoundingBox = function () {
       scene.remove(bboxMesh);
-      var box = setFromObject(group);
-      var width = box.max.x - box.min.x;
-      var height = box.max.y - box.min.y;
-      var depth = box.max.z - box.min.z;
+      let box = setFromObject(group);
+      let width = box.max.x - box.min.x;
+      let height = box.max.y - box.min.y;
+      let depth = box.max.z - box.min.z;
 
-      var bbox = new THREE.BoxGeometry(width, height, depth);
+      let bbox = new THREE.BoxGeometry(width, height, depth);
       bboxMesh = new THREE.Mesh(bbox, new THREE.MeshBasicMaterial({
         color: 0x000000,
         vertexColors: THREE.VertexColors,
@@ -91,8 +91,8 @@ function init() {
     }
   };
 
-  var gui = new dat.GUI();
-  var sphereFolder = gui.addFolder("sphere");
+  let gui = new dat.GUI();
+  let sphereFolder = gui.addFolder("sphere");
   sphereFolder.add(controls, "spherePosX", -20, 20).onChange(function (e) {
     sphere.position.x = e;
     controls.positionBoundingBox()
@@ -114,7 +114,7 @@ function init() {
     controls.redraw();
   });
 
-  var cubeFolder = gui.addFolder("cube");
+  let cubeFolder = gui.addFolder("cube");
   cubeFolder.add(controls, "cubePosX", -20, 20).onChange(function (e) {
     cube.position.x = e;
     controls.positionBoundingBox();
@@ -136,7 +136,7 @@ function init() {
     controls.redraw();
   });
 
-  var cubeFolder = gui.addFolder("group");
+  let cubeFolder = gui.addFolder("group");
   cubeFolder.add(controls, "groupPosX", -20, 20).onChange(function (e) {
     group.position.x = e;
     controls.positionBoundingBox();
@@ -166,11 +166,11 @@ function init() {
   function createMesh(geom) {
 
     // assign two materials
-    var meshMaterial = new THREE.MeshNormalMaterial();
+    let meshMaterial = new THREE.MeshNormalMaterial();
     meshMaterial.side = THREE.DoubleSide;
 
     // create a multimaterial
-    var plane = new THREE.Mesh(geom, meshMaterial);
+    let plane = new THREE.Mesh(geom, meshMaterial);
 
     return plane;
   }
@@ -196,14 +196,14 @@ function init() {
 
   // http://jsfiddle.net/MREL4/
   function setFromObject(object) {
-    var box = new THREE.Box3();
-    var v1 = new THREE.Vector3();
+    let box = new THREE.Box3();
+    let v1 = new THREE.Vector3();
     object.updateMatrixWorld(true);
     box.makeEmpty();
     object.traverse(function (node) {
       if (node.geometry !== undefined && node.geometry.vertices !== undefined) {
-        var vertices = node.geometry.vertices;
-        for (var i = 0, il = vertices.length; i < il; i++) {
+        let vertices = node.geometry.vertices;
+        for (let i = 0, il = vertices.length; i < il; i++) {
           v1.copy(vertices[i]);
           v1.applyMatrix4(node.matrixWorld);
           box.expandByPoint(v1);

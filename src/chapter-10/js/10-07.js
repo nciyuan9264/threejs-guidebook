@@ -1,32 +1,32 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera(new THREE.Vector3(0, 20, 40));
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera(new THREE.Vector3(0, 20, 40));
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   // and add some simple default lights
-  var scene = new THREE.Scene();
-  var groundPlane = addLargeGroundPlane(scene)
+  let scene = new THREE.Scene();
+  let groundPlane = addLargeGroundPlane(scene)
   groundPlane.position.y = -10;
   initDefaultLighting(scene);
   scene.add(new THREE.AmbientLight(0x444444));
 
-  var gui = new dat.GUI();
-  var controls = {};
+  let gui = new dat.GUI();
+  let controls = {};
 
   // images from: http://www.anyhere.com/gward/hdrenc/pages/originals.html
-  var hdrTextureLoader = new THREE.RGBELoader();
+  let hdrTextureLoader = new THREE.RGBELoader();
   hdrTextureLoader.load('../../assets/textures/hdr/dani_cathedral_oBBC.hdr', function(texture, metadata) {
     texture.encoding = THREE.RGBEEncoding;
     texture.flipY = true;
 
     // add a simple plane to show the texture
-    var plane = new THREE.PlaneGeometry(20, 20)
-    var planeMesh = addGeometry(scene, plane, 'plane', texture, gui, controls);
+    let plane = new THREE.PlaneGeometry(20, 20)
+    let planeMesh = addGeometry(scene, plane, 'plane', texture, gui, controls);
     planeMesh.material.side = THREE.DoubleSide;
 
     // we add the webgl folder. When the tonemapping changes, we need
@@ -47,8 +47,8 @@ function init() {
    */
   function addWebglFolder(gui, renderer, onToneMappingChange) {
 
-    var folder = gui.addFolder("WebGL Renderer");
-    var controls = {
+    let folder = gui.addFolder("WebGL Renderer");
+    let controls = {
       toneMapping: renderer.toneMapping
     }
     folder.add(renderer, "toneMappingExposure", 0, 2, 0.1);

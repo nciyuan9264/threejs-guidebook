@@ -1,20 +1,20 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
+  let stats = initStats();
+  let renderer = initRenderer();
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
   // create a camera, which defines where we're looking at.
-  var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 50, 110);
+  let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 50, 110);
   camera.position.set(-50, 40, 50);
   camera.lookAt(scene.position);
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
-  var controls = new function () {
+  let controls = new function () {
     this.cameraNear = camera.near;
     this.cameraFar = camera.far;
     this.rotationSpeed = 0.02;
@@ -23,8 +23,8 @@ function init() {
 
 
     this.removeCube = function () {
-      var allChildren = scene.children;
-      var lastObject = allChildren[allChildren.length - 1];
+      let allChildren = scene.children;
+      let lastObject = allChildren[allChildren.length - 1];
       if (lastObject instanceof THREE.Group) {
         scene.remove(lastObject);
         this.numberOfObjects = scene.children.length;
@@ -33,17 +33,17 @@ function init() {
 
     this.addCube = function () {
 
-      var cubeSize = Math.ceil(3 + (Math.random() * 3));
-      var cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+      let cubeSize = Math.ceil(3 + (Math.random() * 3));
+      let cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
 
-      //var cubeMaterial = new THREE.MeshLambertMaterial({color:  Math.random() * 0xffffff });
-      var cubeMaterial = new THREE.MeshDepthMaterial();
-      var colorMaterial = new THREE.MeshBasicMaterial({
+      //let cubeMaterial = new THREE.MeshLambertMaterial({color:  Math.random() * 0xffffff });
+      let cubeMaterial = new THREE.MeshDepthMaterial();
+      let colorMaterial = new THREE.MeshBasicMaterial({
         color: controls.color,
         transparent: true,
         blending: THREE.MultiplyBlending
       });
-      var cube = new THREE.SceneUtils.createMultiMaterialObject(cubeGeometry, [colorMaterial,
+      let cube = new THREE.SceneUtils.createMultiMaterialObject(cubeGeometry, [colorMaterial,
         cubeMaterial
       ]);
       cube.children[1].scale.set(0.99, 0.99, 0.99);
@@ -64,7 +64,7 @@ function init() {
     }
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.addColor(controls, 'color');
   gui.add(controls, 'rotationSpeed', 0, 0.5);
   gui.add(controls, 'addCube');
@@ -78,7 +78,7 @@ function init() {
     camera.updateProjectionMatrix();
   });
 
-  var i = 0;
+  let i = 0;
   while (i < 10) {
     controls.addCube();
     i++;

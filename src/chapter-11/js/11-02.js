@@ -1,53 +1,53 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera(new THREE.Vector3(0, 20, 40));
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera(new THREE.Vector3(0, 20, 40));
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
   // create a scene and add a light
-  var scene = new THREE.Scene();
-  var earthAndLight = addEarth(scene);
-  var earth = earthAndLight.earth;
-  var pivot = earthAndLight.pivot;
+  let scene = new THREE.Scene();
+  let earthAndLight = addEarth(scene);
+  let earth = earthAndLight.earth;
+  let pivot = earthAndLight.pivot;
 
   // setup effects
-  var renderPass = new THREE.RenderPass(scene, camera);
-  var effectFilm = new THREE.FilmPass(0.8, 0.325, 256, false);  
+  let renderPass = new THREE.RenderPass(scene, camera);
+  let effectFilm = new THREE.FilmPass(0.8, 0.325, 256, false);  
   effectFilm.renderToScreen = true;
-  var bloomPass = new THREE.BloomPass();    
-  var dotScreenPass = new THREE.DotScreenPass();   
-  var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
+  let bloomPass = new THREE.BloomPass();    
+  let dotScreenPass = new THREE.DotScreenPass();   
+  let effectCopy = new THREE.ShaderPass(THREE.CopyShader);
   effectCopy.renderToScreen = true;
 
-  var composer = new THREE.EffectComposer(renderer);
+  let composer = new THREE.EffectComposer(renderer);
   composer.addPass(renderPass);
   composer.addPass(effectCopy);
 
   // reuse the rendered scene from the composer
-  var renderedScene = new THREE.TexturePass(composer.renderTarget2); 
+  let renderedScene = new THREE.TexturePass(composer.renderTarget2); 
 
   // define the composers
-  var effectFilmComposer = new THREE.EffectComposer(renderer);
+  let effectFilmComposer = new THREE.EffectComposer(renderer);
   effectFilmComposer.addPass(renderedScene);
   effectFilmComposer.addPass(effectFilm);
 
-  var bloomComposer = new THREE.EffectComposer(renderer);
+  let bloomComposer = new THREE.EffectComposer(renderer);
   bloomComposer.addPass(renderedScene);
   bloomComposer.addPass(bloomPass);
   bloomComposer.addPass(effectCopy);
 
-  var dotScreenComposer = new THREE.EffectComposer(renderer);
+  let dotScreenComposer = new THREE.EffectComposer(renderer);
   dotScreenComposer.addPass(renderedScene);
   dotScreenComposer.addPass(dotScreenPass);
   dotScreenComposer.addPass(effectCopy);
 
   // setup controls
     // setup controls
-  var gui = new dat.GUI();
-  var controls = {};
+  let gui = new dat.GUI();
+  let controls = {};
   
   addFilmPassControls(gui, controls, effectFilm);
   addDotScreenPassControls(gui, controls, dotScreenPass);
@@ -55,14 +55,14 @@ function init() {
   
   // do the basic rendering, since we render to multiple parts of the screen
   // determine the 
-  var width = window.innerWidth;
-  var height = window.innerHeight;
-  var halfWidth = width / 2;
-  var halfHeight = height / 2;
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  let halfWidth = width / 2;
+  let halfHeight = height / 2;
   render();
   function render() {
     stats.update();
-    var delta = clock.getDelta();
+    let delta = clock.getDelta();
     trackballControls.update(delta);
     earth.rotation.y += 0.001;
     pivot.rotation.y += -0.0003;

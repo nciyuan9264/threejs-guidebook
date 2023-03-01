@@ -1,29 +1,29 @@
 function init() {
 
-    var stats = initStats();
+    let stats = initStats();
 
     // create a scene, that will hold all our elements such as objects, cameras and lights.
-    var scene = new THREE.Scene();
+    let scene = new THREE.Scene();
     scene.overrideMaterial = new THREE.MeshLambertMaterial({
         color: 0xffffff
     });
 
     // create a camera, which defines where we're looking at.
-    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
     // create a render and set the size
-    var renderer = new THREE.WebGLRenderer();
+    let renderer = new THREE.WebGLRenderer();
 
     renderer.setClearColor(new THREE.Color(0x000000));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
 
     // create the ground plane
-    var planeGeometry = new THREE.PlaneGeometry(60, 40, 1, 1);
-    var planeMaterial = new THREE.MeshLambertMaterial({
+    let planeGeometry = new THREE.PlaneGeometry(60, 40, 1, 1);
+    let planeMaterial = new THREE.MeshLambertMaterial({
         color: 0xffffff
     });
-    var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    let plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.receiveShadow = true;
 
     // rotate and position the plane
@@ -42,11 +42,11 @@ function init() {
     camera.lookAt(scene.position);
 
     // add subtle ambient lighting
-    var ambientLight = new THREE.AmbientLight(0x0c0c0c);
+    let ambientLight = new THREE.AmbientLight(0x0c0c0c);
     scene.add(ambientLight);
 
     // add spotlight for the shadows
-    var spotLight = new THREE.SpotLight(0xffffff, 1, 150, 120);
+    let spotLight = new THREE.SpotLight(0xffffff, 1, 150, 120);
     spotLight.position.set(-40, 60, -10);
     spotLight.castShadow = true;
     scene.add(spotLight);
@@ -55,15 +55,15 @@ function init() {
     document.getElementById("webgl-output").appendChild(renderer.domElement);
 
     // call the render function
-    var step = 0;
+    let step = 0;
 
-    var controls = new function () {
+    let controls = new function () {
         this.rotationSpeed = 0.02;
         this.numberOfObjects = scene.children.length;
 
         this.removeCube = function () {
-            var allChildren = scene.children;
-            var lastObject = allChildren[allChildren.length - 1];
+            let allChildren = scene.children;
+            let lastObject = allChildren[allChildren.length - 1];
             if (lastObject instanceof THREE.Mesh) {
                 scene.remove(lastObject);
                 this.numberOfObjects = scene.children.length;
@@ -72,12 +72,12 @@ function init() {
 
         this.addCube = function () {
 
-            var cubeSize = Math.ceil((Math.random() * 3));
-            var cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
-            var cubeMaterial = new THREE.MeshLambertMaterial({
+            let cubeSize = Math.ceil((Math.random() * 3));
+            let cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+            let cubeMaterial = new THREE.MeshLambertMaterial({
                 color: Math.random() * 0xffffff
             });
-            var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+            let cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
             cube.castShadow = true;
 
             // position the cube randomly in the scene
@@ -95,15 +95,15 @@ function init() {
         }
     };
 
-    var gui = new dat.GUI();
+    let gui = new dat.GUI();
     gui.add(controls, 'rotationSpeed', 0, 0.5);
     gui.add(controls, 'addCube');
     gui.add(controls, 'removeCube');
     gui.add(controls, 'outputObjects');
     gui.add(controls, 'numberOfObjects').listen();
 
-    var trackballControls = initTrackballControls(camera, renderer);
-    var clock = new THREE.Clock();
+    let trackballControls = initTrackballControls(camera, renderer);
+    let clock = new THREE.Clock();
 
     render();
 

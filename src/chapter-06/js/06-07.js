@@ -3,23 +3,23 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
-  var scene = new THREE.Scene();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
+  let scene = new THREE.Scene();
   initDefaultLighting(scene);
-  var groundPlane = addLargeGroundPlane(scene)
+  let groundPlane = addLargeGroundPlane(scene)
   groundPlane.position.y = -30;
 
-  var font_bitstream;
-  var font_helvetiker_bold;
-  var font_helvetiker_regular;
+  let font_bitstream;
+  let font_helvetiker_bold;
+  let font_helvetiker_regular;
 
-  var step = 0;
-  var text1;
-  var text2;
+  let step = 0;
+  let text1;
+  let text2;
 
-  var fontload1 = new THREE.FontLoader();
+  let fontload1 = new THREE.FontLoader();
   fontload1.load( '../../assets/fonts/bitstream_vera_sans_mono_roman.typeface.json', function ( response ) {
     controls.font = response;
     font_bitstream = response;
@@ -27,17 +27,17 @@ function init() {
     render();
   });
 
-  var fontload2 = new THREE.FontLoader();
+  let fontload2 = new THREE.FontLoader();
   fontload2.load( '../../assets/fonts/helvetiker_bold.typeface.json', function ( response ) {
     font_helvetiker_bold = response;
   });
 
-  var fontload3 = new THREE.FontLoader();
+  let fontload3 = new THREE.FontLoader();
   fontload3.load( '../../assets/fonts/helvetiker_regular.typeface.json', function ( response ) {
     font_helvetiker_regular = response;
   });
 
-  var controls = new function () {
+  let controls = new function () {
 
     this.appliedMaterial = applyMeshNormalMaterial
     this.castShadow = true;
@@ -70,7 +70,7 @@ function init() {
       }
 
       redrawGeometryAndUpdateUI(gui, scene, controls, function() {
-            var options = {
+            let options = {
               size: controls.size,
               height: controls.height,
               weight: controls.weight,
@@ -83,7 +83,7 @@ function init() {
               steps: controls.steps
             };
 
-            var geom = new THREE.TextGeometry("Learning Three.js", options)
+            let geom = new THREE.TextGeometry("Learning Three.js", options)
             geom.applyMatrix(new THREE.Matrix4().makeScale(0.05,0.05,0.05));
             geom.center();
     
@@ -94,7 +94,7 @@ function init() {
 
 
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'size', 0, 200).onChange(controls.redraw);
   gui.add(controls, 'height', 0, 200).onChange(controls.redraw);
   gui.add(controls, 'fontName', ['bitstream vera sans mono', 'helvetiker', 'helvetiker bold']).onChange(controls.redraw);

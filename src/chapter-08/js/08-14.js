@@ -1,11 +1,11 @@
 function init() {
 
   // setup the scene for rendering
-  var camera = initCamera(new THREE.Vector3(30, 30, 30));
-  var loaderScene = new BaseLoaderScene(camera);
+  let camera = initCamera(new THREE.Vector3(30, 30, 30));
+  let loaderScene = new BaseLoaderScene(camera);
   camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-  var loader = new THREE.AWDLoader();
+  let loader = new THREE.AWDLoader();
   loader.load("../../assets/models/polarbear/PolarBear.awd", function (model) {
 
       model.traverse(function (child) {

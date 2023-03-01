@@ -1,25 +1,25 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera(new THREE.Vector3(0, 20, 40));
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera(new THREE.Vector3(0, 20, 40));
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   // and add some simple default lights
-  var scene = new THREE.Scene();
-  var groundPlane = addLargeGroundPlane(scene)
+  let scene = new THREE.Scene();
+  let groundPlane = addLargeGroundPlane(scene)
   groundPlane.position.y = -10;
   initDefaultLighting(scene);
   scene.add(new THREE.AmbientLight(0x444444));
 
-  var gui = new dat.GUI();
-  var controls = {};
+  let gui = new dat.GUI();
+  let controls = {};
 
-  var ktxTextureLoader = new THREE.KTXLoader();
-  var texture
+  let ktxTextureLoader = new THREE.KTXLoader();
+  let texture
 
   switch (determineFormat()) {
       case "astc": 
@@ -41,8 +41,8 @@ function init() {
 
 
   // add a simple plane to show the texture
-  var knot = new THREE.TorusKnotGeometry(7, 3)
-  var knotMesh = addGeometry(scene, knot, 'plane', texture, gui, controls);
+  let knot = new THREE.TorusKnotGeometry(7, 3)
+  let knotMesh = addGeometry(scene, knot, 'plane', texture, gui, controls);
   knotMesh.material.side = THREE.DoubleSide;
 
   function determineFormat() {

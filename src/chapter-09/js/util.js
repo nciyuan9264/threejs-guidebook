@@ -1,6 +1,6 @@
 
 function setRandomColors(object, scale) {
-  var children = object.children;
+  let children = object.children;
   if (children && children.length > 0) {
       children.forEach(function (e) {
           setRandomColors(e, scale)
@@ -38,7 +38,7 @@ function setRandomColors(object, scale) {
  * @return the control object
  */
 function addClipActionFolder(folderName, gui, clipAction, animationClip) {
-  var actionControls = {
+  let actionControls = {
       keyframe: 0,
       time: 0,
       timeScale: 1,
@@ -55,7 +55,7 @@ function addClipActionFolder(folderName, gui, clipAction, animationClip) {
       effectiveTimeScale: 0
     }
 
-    var actionFolder = gui.addFolder(folderName)
+    let actionFolder = gui.addFolder(folderName)
     actionFolder.add(clipAction, "clampWhenFinished").listen();
     actionFolder.add(clipAction, "enabled").listen();
     actionFolder.add(clipAction, "paused").listen();

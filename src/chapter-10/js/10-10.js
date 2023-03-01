@@ -1,30 +1,30 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera(new THREE.Vector3(0, 20, 40));
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera(new THREE.Vector3(0, 20, 40));
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   // and add some simple default lights
-  var scene = new THREE.Scene();
-  var textureLoader = new THREE.TextureLoader();
-  var groundPlane = addLargeGroundPlane(scene, true)
+  let scene = new THREE.Scene();
+  let textureLoader = new THREE.TextureLoader();
+  let groundPlane = addLargeGroundPlane(scene, true)
   groundPlane.position.y = -8;
 
   initDefaultLighting(scene);
   scene.add(new THREE.AmbientLight(0x444444));
 
-  var gui = new dat.GUI();
-  var controls = {
+  let gui = new dat.GUI();
+  let controls = {
     displacementScale: 1,
     displacementBias: 0,
   };
 
-  var sphere = new THREE.SphereGeometry(8, 180, 180)
-  var sphereMaterial = new THREE.MeshStandardMaterial({
+  let sphere = new THREE.SphereGeometry(8, 180, 180)
+  let sphereMaterial = new THREE.MeshStandardMaterial({
       map: textureLoader.load("../../assets/textures/w_c.jpg"),
       displacementMap: textureLoader.load("../../assets/textures/w_d.png"),
       metalness: 0.02,

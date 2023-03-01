@@ -1,30 +1,30 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
+  let stats = initStats();
+  let renderer = initRenderer();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
   scene.overrideMaterial = new THREE.MeshDepthMaterial();
 
-  var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 50, 110);
+  let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 50, 110);
   camera.position.set(-50, 40, 50);
   camera.lookAt(scene.position);
 
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
-  var controls = new function () {
+  let controls = new function () {
     this.cameraNear = camera.near;
     this.cameraFar = camera.far;
     this.rotationSpeed = 0.02;
     this.numberOfObjects = scene.children.length;
 
     this.removeCube = function () {
-      var allChildren = scene.children;
-      var lastObject = allChildren[allChildren.length - 1];
+      let allChildren = scene.children;
+      let lastObject = allChildren[allChildren.length - 1];
       if (lastObject instanceof THREE.Mesh) {
         scene.remove(lastObject);
         this.numberOfObjects = scene.children.length;
@@ -33,12 +33,12 @@ function init() {
 
     this.addCube = function () {
 
-      var cubeSize = Math.ceil(3 + (Math.random() * 3));
-      var cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
-      var cubeMaterial = new THREE.MeshLambertMaterial({
+      let cubeSize = Math.ceil(3 + (Math.random() * 3));
+      let cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+      let cubeMaterial = new THREE.MeshLambertMaterial({
         color: Math.random() * 0xffffff
       });
-      var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+      let cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
       cube.castShadow = true;
 
       // position the cube randomly in the scene
@@ -56,9 +56,9 @@ function init() {
     }
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   addBasicMaterialSettings(gui, controls, scene.overrideMaterial);
-  var spGui = gui.addFolder("THREE.MeshDepthMaterial");
+  let spGui = gui.addFolder("THREE.MeshDepthMaterial");
   spGui.add(scene.overrideMaterial, 'wireframe');
   spGui.add(scene.overrideMaterial, 'wireframeLinewidth', 0, 20);
 
@@ -74,7 +74,7 @@ function init() {
     camera.updateProjectionMatrix();
   });
 
-  var i = 0;
+  let i = 0;
   while (i < 10) {
     controls.addCube();
     i++;

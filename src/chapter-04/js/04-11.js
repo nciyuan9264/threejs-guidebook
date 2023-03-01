@@ -1,50 +1,50 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
 
-  var cubeGeometry = new THREE.BoxGeometry(20, 20, 20);
+  let cubeGeometry = new THREE.BoxGeometry(20, 20, 20);
 
-  var meshMaterial1 = createMaterial("vertex-shader",
+  let meshMaterial1 = createMaterial("vertex-shader",
     "fragment-shader-1");
-  var meshMaterial2 = createMaterial("vertex-shader",
+  let meshMaterial2 = createMaterial("vertex-shader",
     "fragment-shader-2");
-  var meshMaterial3 = createMaterial("vertex-shader",
+  let meshMaterial3 = createMaterial("vertex-shader",
     "fragment-shader-3");
-  var meshMaterial4 = createMaterial("vertex-shader",
+  let meshMaterial4 = createMaterial("vertex-shader",
     "fragment-shader-4");
-  var meshMaterial5 = createMaterial("vertex-shader",
+  let meshMaterial5 = createMaterial("vertex-shader",
     "fragment-shader-5");
-  var meshMaterial6 = createMaterial("vertex-shader",
+  let meshMaterial6 = createMaterial("vertex-shader",
     "fragment-shader-6");
 
 
-  var material = [meshMaterial1, meshMaterial2, meshMaterial3, meshMaterial4, meshMaterial5, meshMaterial6];
-  var cube = new THREE.Mesh(cubeGeometry, material);
+  let material = [meshMaterial1, meshMaterial2, meshMaterial3, meshMaterial4, meshMaterial5, meshMaterial6];
+  let cube = new THREE.Mesh(cubeGeometry, material);
 
   // add the sphere to the scene
   scene.add(cube);
 
   // add subtle ambient lighting
-  var ambientLight = new THREE.AmbientLight(0x0c0c0c);
+  let ambientLight = new THREE.AmbientLight(0x0c0c0c);
   scene.add(ambientLight);
 
   // add spotlight for the shadows
-  var spotLight = new THREE.SpotLight(0xffffff);
+  let spotLight = new THREE.SpotLight(0xffffff);
   spotLight.position.set(-40, 60, -10);
   spotLight.castShadow = true;
   scene.add(spotLight);
 
   // call the render function
-  var step = 0;
-  var oldContext = null;
+  let step = 0;
+  let oldContext = null;
 
-  var controls = new function () {
+  let controls = new function () {
     this.rotationSpeed = 0.02;
     this.bouncingSpeed = 0.03;
 
@@ -84,11 +84,11 @@ function init() {
   }
 
   function createMaterial(vertexShader, fragmentShader) {
-    var vertShader = document.getElementById(vertexShader).innerHTML;
-    var fragShader = document.getElementById(fragmentShader).innerHTML;
+    let vertShader = document.getElementById(vertexShader).innerHTML;
+    let fragShader = document.getElementById(fragmentShader).innerHTML;
 
-    var attributes = {};
-    var uniforms = {
+    let attributes = {};
+    let uniforms = {
       time: {
         type: 'f',
         value: 0.2
@@ -110,7 +110,7 @@ function init() {
     uniforms.resolution.value.x = window.innerWidth;
     uniforms.resolution.value.y = window.innerHeight;
 
-    var meshMaterial = new THREE.ShaderMaterial({
+    let meshMaterial = new THREE.ShaderMaterial({
       uniforms: uniforms,
       vertexShader: vertShader,
       fragmentShader: fragShader,

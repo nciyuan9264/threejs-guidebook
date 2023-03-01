@@ -1,13 +1,13 @@
 function init() {
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
-  var scene = new THREE.Scene();
-  var clock = new THREE.Clock();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
+  let scene = new THREE.Scene();
+  let clock = new THREE.Clock();
 
   initDefaultLighting(scene);  
 
-  var fpControls = new THREE.FirstPersonControls(camera);
+  let fpControls = new THREE.FirstPersonControls(camera);
   fpControls.lookSpeed = 0.4;
   fpControls.movementSpeed = 20;
   fpControls.lookVertical = true;
@@ -17,10 +17,10 @@ function init() {
   fpControls.lon = -150;
   fpControls.lat = 120;
 
-  var loader = new THREE.OBJLoader();
+  let loader = new THREE.OBJLoader();
   loader.load("../../assets/models/city/city.obj", function (object) {
 
-    var scale = chroma.scale(['red', 'green', 'blue']);
+    let scale = chroma.scale(['red', 'green', 'blue']);
     setRandomColors(object, scale);
     mesh = object ;
     scene.add(mesh);

@@ -1,12 +1,12 @@
 function init() {
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
   // create a camera, which defines where we're looking at.
-  var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
   // create a render and configure it with shadows
-  var renderer = new THREE.WebGLRenderer();
+  let renderer = new THREE.WebGLRenderer();
   renderer.setClearColor(new THREE.Color(0x000000));
   renderer.setSize(window.innerWidth, window.innerHeight);
   // renderer.shadowMap.enabled = true;
@@ -17,11 +17,11 @@ function init() {
   // createBoundingWall(scene);
 
   // create a cube
-  var cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
-  var cubeMaterial = new THREE.MeshLambertMaterial({
+  let cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
+  let cubeMaterial = new THREE.MeshLambertMaterial({
     color: 0xFF0000
   });
-  var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+  let cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
   cube.castShadow = true;
 
   // position the cube
@@ -31,11 +31,11 @@ function init() {
 
   // add the cube to the scene
 
-  var sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
-  var sphereMaterial = new THREE.MeshLambertMaterial({
+  let sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
+  let sphereMaterial = new THREE.MeshLambertMaterial({
     color: 0x7777ff
   });
-  var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+  let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
   // position the sphere
   sphere.position.x = 20;
@@ -44,11 +44,11 @@ function init() {
   sphere.castShadow = true;
 
   // create the ground plane
-  var planeGeometry = new THREE.PlaneGeometry(60, 20);
-  var planeMaterial = new THREE.MeshLambertMaterial({
+  let planeGeometry = new THREE.PlaneGeometry(60, 20);
+  let planeMaterial = new THREE.MeshLambertMaterial({
     color: 0xAAAAAA
   });
-  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  let plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
   // rotate and position the plane
   plane.rotation.x = -0.5 * Math.PI;
@@ -67,7 +67,7 @@ function init() {
   camera.lookAt(scene.position);
 
   // add spotlight for the shadows
-  var spotLight = new THREE.SpotLight(0xFFFFFF);
+  let spotLight = new THREE.SpotLight(0xFFFFFF);
   spotLight.position.set(-40, 40, -15);
   spotLight.castShadow = true;
   spotLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
@@ -79,7 +79,7 @@ function init() {
   // spotLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
   scene.add(spotLight);
 
-  var ambienLight = new THREE.AmbientLight(0x353535);
+  let ambienLight = new THREE.AmbientLight(0x353535);
   scene.add(ambienLight);
 
   // add the output of the renderer to the html element
@@ -90,19 +90,19 @@ function init() {
 }
 
 function createBoundingWall(scene) {
-  var wallLeft = new THREE.CubeGeometry(70, 2, 2);
-  var wallRight = new THREE.CubeGeometry(70, 2, 2);
-  var wallTop = new THREE.CubeGeometry(2, 2, 50);
-  var wallBottom = new THREE.CubeGeometry(2, 2, 50);
+  let wallLeft = new THREE.CubeGeometry(70, 2, 2);
+  let wallRight = new THREE.CubeGeometry(70, 2, 2);
+  let wallTop = new THREE.CubeGeometry(2, 2, 50);
+  let wallBottom = new THREE.CubeGeometry(2, 2, 50);
 
-  var wallMaterial = new THREE.MeshLambertMaterial({
+  let wallMaterial = new THREE.MeshLambertMaterial({
     color: 0xa0522d
   });
 
-  var wallLeftMesh = new THREE.Mesh(wallLeft, wallMaterial);
-  var wallRightMesh = new THREE.Mesh(wallRight, wallMaterial);
-  var wallTopMesh = new THREE.Mesh(wallTop, wallMaterial);
-  var wallBottomMesh = new THREE.Mesh(wallBottom, wallMaterial);
+  let wallLeftMesh = new THREE.Mesh(wallLeft, wallMaterial);
+  let wallRightMesh = new THREE.Mesh(wallRight, wallMaterial);
+  let wallTopMesh = new THREE.Mesh(wallTop, wallMaterial);
+  let wallBottomMesh = new THREE.Mesh(wallBottom, wallMaterial);
 
   wallLeftMesh.position.set(15, 1, -25);
   wallRightMesh.position.set(15, 1, 25);
@@ -118,11 +118,11 @@ function createBoundingWall(scene) {
 
 function createGroundPlane(scene) {
   // create the ground plane
-  var planeGeometry = new THREE.PlaneGeometry(70, 50);
-  var planeMaterial = new THREE.MeshLambertMaterial({
+  let planeGeometry = new THREE.PlaneGeometry(70, 50);
+  let planeMaterial = new THREE.MeshLambertMaterial({
     color: 0x9acd32
   });
-  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  let plane = new THREE.Mesh(planeGeometry, planeMaterial);
   plane.receiveShadow = true;
 
   // rotate and position the plane
@@ -135,14 +135,14 @@ function createGroundPlane(scene) {
 }
 
 function createHouse(scene) {
-  var roof = new THREE.ConeGeometry(5, 4);
-  var base = new THREE.CylinderGeometry(5, 5, 6);
+  let roof = new THREE.ConeGeometry(5, 4);
+  let base = new THREE.CylinderGeometry(5, 5, 6);
 
   // create the mesh
-  var roofMesh = new THREE.Mesh(roof, new THREE.MeshLambertMaterial({
+  let roofMesh = new THREE.Mesh(roof, new THREE.MeshLambertMaterial({
     color: 0x8b7213
   }));
-  var baseMesh = new THREE.Mesh(base, new THREE.MeshLambertMaterial({
+  let baseMesh = new THREE.Mesh(base, new THREE.MeshLambertMaterial({
     color: 0xffe4c4
   }));
 
@@ -163,14 +163,14 @@ function createHouse(scene) {
  * @param scene The scene to add the tree to
  */
 function createTree(scene) {
-  var trunk = new THREE.CubeGeometry(1, 8, 1);
-  var leaves = new THREE.SphereGeometry(4);
+  let trunk = new THREE.CubeGeometry(1, 8, 1);
+  let leaves = new THREE.SphereGeometry(4);
 
   // create the mesh
-  var trunkMesh = new THREE.Mesh(trunk, new THREE.MeshLambertMaterial({
+  let trunkMesh = new THREE.Mesh(trunk, new THREE.MeshLambertMaterial({
     color: 0x8b4513
   }));
-  var leavesMesh = new THREE.Mesh(leaves, new THREE.MeshLambertMaterial({
+  let leavesMesh = new THREE.Mesh(leaves, new THREE.MeshLambertMaterial({
     color: 0x00ff00
   }));
 

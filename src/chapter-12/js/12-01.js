@@ -5,19 +5,19 @@ function init() {
 
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera(new THREE.Vector3(0, 50, 60));
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
-  var scene = new Physijs.Scene;
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera(new THREE.Vector3(0, 50, 60));
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
+  let scene = new Physijs.Scene;
   initDefaultLighting(scene);
   scene.add(new THREE.AmbientLight(0x0393939));
 
   // setup controls
-  var colors = [0x66ff00, 0x6600ff ];
-  var gui = new dat.GUI();
-  var controls = {
+  let colors = [0x66ff00, 0x6600ff ];
+  let gui = new dat.GUI();
+  let controls = {
     gravityX: 0,
     gravityY: -50,
     gravityZ: 0
@@ -29,12 +29,12 @@ function init() {
 
   scene.setGravity(new THREE.Vector3(0, -50, 0));
   createGroundAndWalls(scene);
-  var points = getPoints();
-  var stones = [];
+  let points = getPoints();
+  let stones = [];
 
   points.forEach(function (point, index) {
-    var stoneGeom = new THREE.BoxGeometry(0.6, 6, 2);
-    var stone = new Physijs.BoxMesh(stoneGeom, Physijs.createMaterial(new THREE.MeshStandardMaterial({
+    let stoneGeom = new THREE.BoxGeometry(0.6, 6, 2);
+    let stone = new Physijs.BoxMesh(stoneGeom, Physijs.createMaterial(new THREE.MeshStandardMaterial({
       color: colors[index % colors.length], transparent: true, opacity: 0.8
     })));
 
@@ -59,7 +59,7 @@ stones[0].__dirtyRotation = true;
   render();
   function render() {
     stats.update();
-    var delta = clock.getDelta();
+    let delta = clock.getDelta();
     trackballControls.update(delta);
    
     requestAnimationFrame(render);
@@ -69,19 +69,19 @@ stones[0].__dirtyRotation = true;
 }
 
 function getPoints() {
-  var points = [];
-  var r = 27;
-  var cX = 0;
-  var cY = 0;
+  let points = [];
+  let r = 27;
+  let cX = 0;
+  let cY = 0;
 
-  var circleOffset = 0;
-  for (var i = 0; i < 1000; i += 6 + circleOffset) {
+  let circleOffset = 0;
+  for (let i = 0; i < 1000; i += 6 + circleOffset) {
 
       circleOffset = 4.5 * (i / 360);
 
-      var x = (r / 1440) * (1440 - i) * Math.cos(i * (Math.PI / 180)) + cX;
-      var z = (r / 1440) * (1440 - i) * Math.sin(i * (Math.PI / 180)) + cY;
-      var y = 0;
+      let x = (r / 1440) * (1440 - i) * Math.cos(i * (Math.PI / 180)) + cX;
+      let z = (r / 1440) * (1440 - i) * Math.sin(i * (Math.PI / 180)) + cY;
+      let y = 0;
 
       points.push(new THREE.Vector3(x, y, z));
   }
@@ -90,18 +90,18 @@ function getPoints() {
 }
 
 function createGroundAndWalls(scene) {
-  var textureLoader = new THREE.TextureLoader();
-  var ground_material = Physijs.createMaterial(
+  let textureLoader = new THREE.TextureLoader();
+  let ground_material = Physijs.createMaterial(
           new THREE.MeshStandardMaterial(
             {map: textureLoader.load('../../assets/textures/general/wood-2.jpg')}
           ),
           .9, .3);
 
-  var ground = new Physijs.BoxMesh(new THREE.BoxGeometry(60, 1, 60), ground_material, 0);
+  let ground = new Physijs.BoxMesh(new THREE.BoxGeometry(60, 1, 60), ground_material, 0);
   ground.castShadow = true;
   ground.receiveShadow = true;
 
-  var borderLeft = new Physijs.BoxMesh(new THREE.BoxGeometry(2, 3, 60), ground_material, 0);
+  let borderLeft = new Physijs.BoxMesh(new THREE.BoxGeometry(2, 3, 60), ground_material, 0);
   borderLeft.position.x = -31;
   borderLeft.position.y = 2;
   borderLeft.castShadow = true;
@@ -109,7 +109,7 @@ function createGroundAndWalls(scene) {
 
   ground.add(borderLeft);
 
-  var borderRight = new Physijs.BoxMesh(new THREE.BoxGeometry(2, 3, 60), ground_material, 0);
+  let borderRight = new Physijs.BoxMesh(new THREE.BoxGeometry(2, 3, 60), ground_material, 0);
   borderRight.position.x = 31;
   borderRight.position.y = 2;
   borderRight.castShadow = true;
@@ -117,7 +117,7 @@ function createGroundAndWalls(scene) {
 
   ground.add(borderRight);
 
-  var borderBottom = new Physijs.BoxMesh(new THREE.BoxGeometry(64, 3, 2), ground_material, 0);
+  let borderBottom = new Physijs.BoxMesh(new THREE.BoxGeometry(64, 3, 2), ground_material, 0);
   borderBottom.position.z = 30;
   borderBottom.position.y = 2;
   borderBottom.castShadow = true;
@@ -125,7 +125,7 @@ function createGroundAndWalls(scene) {
 
   ground.add(borderBottom);
 
-  var borderTop = new Physijs.BoxMesh(new THREE.BoxGeometry(64, 3, 2), ground_material, 0);
+  let borderTop = new Physijs.BoxMesh(new THREE.BoxGeometry(64, 3, 2), ground_material, 0);
   borderTop.position.z = -30;
   borderTop.position.y = 2;
   borderTop.castShadow = true;

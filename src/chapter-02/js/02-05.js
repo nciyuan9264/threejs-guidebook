@@ -1,24 +1,24 @@
 function init() {
 
-  var stats = initStats();
+  let stats = initStats();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
   // create a camera, which defines where we're looking at.
-  var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
   // create a render and set the size
-  var renderer = new THREE.WebGLRenderer();
+  let renderer = new THREE.WebGLRenderer();
 
   renderer.setClearColor(new THREE.Color(0x000000));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMap.enabled = true;
 
   // create the ground plane
-  var planeGeometry = new THREE.PlaneGeometry(60, 40, 1, 1);
-  var planeMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
-  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  let planeGeometry = new THREE.PlaneGeometry(60, 40, 1, 1);
+  let planeMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
+  let plane = new THREE.Mesh(planeGeometry, planeMaterial);
   plane.receiveShadow = true;
 
   // rotate and position the plane
@@ -37,17 +37,17 @@ function init() {
   camera.lookAt(new THREE.Vector3(5, 0, 0));
 
   // add subtle ambient lighting
-  var ambientLight = new THREE.AmbientLight(0x494949);
+  let ambientLight = new THREE.AmbientLight(0x494949);
   scene.add(ambientLight);
 
   // add the output of the renderer to the html element
   document.getElementById("webgl-output").appendChild(renderer.domElement);
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
 
-  var vertices = [
+  let vertices = [
       new THREE.Vector3(1, 3, 1),
       new THREE.Vector3(1, 3, -1),
       new THREE.Vector3(1, -1, 1),
@@ -58,7 +58,7 @@ function init() {
       new THREE.Vector3(-1, -1, 1)
   ];
 
-  var faces = [
+  let faces = [
       new THREE.Face3(0, 2, 1),
       new THREE.Face3(2, 3, 1),
       new THREE.Face3(4, 6, 5),
@@ -73,17 +73,17 @@ function init() {
       new THREE.Face3(3, 6, 4),
   ];
 
-  var geom = new THREE.Geometry();
+  let geom = new THREE.Geometry();
   geom.vertices = vertices;
   geom.faces = faces;
   geom.computeFaceNormals();
 
-  var materials = [
+  let materials = [
     new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true}),
     new THREE.MeshLambertMaterial({opacity: 0.6, color: 0x44ff44, transparent: true})
   ];
 
-  var mesh = THREE.SceneUtils.createMultiMaterialObject(geom, materials);
+  let mesh = THREE.SceneUtils.createMultiMaterialObject(geom, materials);
   mesh.castShadow = true;
   mesh.children.forEach(function (e) {
       e.castShadow = true
@@ -92,7 +92,7 @@ function init() {
   scene.add(mesh);
 
   // add spotlight for the shadows
-  var spotLight = new THREE.SpotLight(0xffffff, 1, 180, Math.PI/4);
+  let spotLight = new THREE.SpotLight(0xffffff, 1, 180, Math.PI/4);
   spotLight.shadow.mapSize.height = 2048;
   spotLight.shadow.mapSize.width = 2048;
   spotLight.position.set(-40, 30, 30);
@@ -101,7 +101,7 @@ function init() {
   scene.add(spotLight);
 
   function addControl(x, y, z) {
-      var controls = new function () {
+      let controls = new function () {
           this.x = x;
           this.y = y;
           this.z = z;
@@ -110,7 +110,7 @@ function init() {
       return controls;
   }
 
-  var controlPoints = [];
+  let controlPoints = [];
   controlPoints.push(addControl(3, 5, 3));
   controlPoints.push(addControl(3, 5, 0));
   controlPoints.push(addControl(3, 0, 3));
@@ -120,17 +120,17 @@ function init() {
   controlPoints.push(addControl(0, 0, 0));
   controlPoints.push(addControl(0, 0, 3));
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(new function () {
       this.clone = function () {
 
-          var clonedGeometry = mesh.children[0].geometry.clone();
-          var materials = [
+          let clonedGeometry = mesh.children[0].geometry.clone();
+          let materials = [
               new THREE.MeshLambertMaterial({opacity: 0.8, color: 0xff44ff, transparent: true}),
               new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true})
           ];
 
-          var mesh2 = THREE.SceneUtils.createMultiMaterialObject(clonedGeometry, materials);
+          let mesh2 = THREE.SceneUtils.createMultiMaterialObject(clonedGeometry, materials);
           mesh2.children.forEach(function (e) {
               e.castShadow = true
           });
@@ -145,7 +145,7 @@ function init() {
       }
   }, 'clone');
 
-  for (var i = 0; i < 8; i++) {
+  for (let i = 0; i < 8; i++) {
 
       f1 = gui.addFolder('Vertices ' + (i + 1));
       f1.add(controlPoints[i], 'x', -10, 10);
@@ -154,8 +154,8 @@ function init() {
 
   }
 
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
   render();
 
@@ -163,8 +163,8 @@ function init() {
       trackballControls.update(clock.getDelta());
       stats.update();
 
-      var vertices = [];
-      for (var i = 0; i < 8; i++) {
+      let vertices = [];
+      for (let i = 0; i < 8; i++) {
           vertices.push(new THREE.Vector3(controlPoints[i].x, controlPoints[i].y, controlPoints[i].z));
       }
 

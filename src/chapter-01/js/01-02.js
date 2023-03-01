@@ -1,25 +1,25 @@
 function init() {
     // create a scene, that will hold all our elements such as objects, cameras and lights.
-    var scene = new THREE.Scene();
+    let scene = new THREE.Scene();
 
     // create a camera, which defines where we're looking at.
-    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
     // create a render and set the size
-    var renderer = new THREE.WebGLRenderer();
+    let renderer = new THREE.WebGLRenderer();
     renderer.setClearColor(new THREE.Color(0x000000));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // show axes in the screen
-    var axes = new THREE.AxesHelper(20);
+    let axes = new THREE.AxesHelper(20);
     scene.add(axes);
 
     // create the ground plane
-    var planeGeometry = new THREE.PlaneGeometry(60, 20);
-    var planeMaterial = new THREE.MeshBasicMaterial({
+    let planeGeometry = new THREE.PlaneGeometry(60, 20);
+    let planeMaterial = new THREE.MeshBasicMaterial({
         color: 0xAAAAAA
     });
-    var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    let plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
     // rotate and position the plane
     plane.rotation.x = -0.5 * Math.PI;
@@ -29,12 +29,12 @@ function init() {
     scene.add(plane);
 
     // create a cube
-    var cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
-    var cubeMaterial = new THREE.MeshBasicMaterial({
+    let cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
+    let cubeMaterial = new THREE.MeshBasicMaterial({
         color: 0xFF0000,
         wireframe: true
     });
-    var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    let cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
     // position the cube
     cube.position.set(-4, 3, 0);
@@ -43,12 +43,12 @@ function init() {
     scene.add(cube);
 
     // create a sphere
-    var sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
-    var sphereMaterial = new THREE.MeshBasicMaterial({
+    let sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
+    let sphereMaterial = new THREE.MeshBasicMaterial({
         color: 0x7777FF,
         wireframe: true
     });
-    var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
     // position the sphere
     sphere.position.set(20, 4, 2);

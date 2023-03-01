@@ -1,23 +1,23 @@
 function init() {
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
-  var scene = new THREE.Scene();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
+  let scene = new THREE.Scene();
   scene.add(new THREE.AmbientLight(0x333333));
   camera.position.set(0, 15, 70);
 
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
   initDefaultLighting(scene);
 
-  var loader = new THREE.JSONLoader();
-  var mesh
-  var skeletonHelper
-  var tween
+  let loader = new THREE.JSONLoader();
+  let mesh
+  let skeletonHelper
+  let tween
 
   loader.load('../../assets/models/hand/hand-1.js', function (geometry, mat) {
-    var mat = new THREE.MeshLambertMaterial({color: 0xF0C8C9, skinning: true});
+    let mat = new THREE.MeshLambertMaterial({color: 0xF0C8C9, skinning: true});
     mesh = new THREE.SkinnedMesh(geometry, mat);
     mesh.scale.set(15,15,15);
     mesh.position.x = -5;
@@ -26,8 +26,8 @@ function init() {
     scene.add(mesh);
     startAnimation();
 
-    var gui = new dat.GUI();
-    var controls = {
+    let gui = new dat.GUI();
+    let controls = {
       showHelper: false
     }
     gui.add(controls, "showHelper").onChange(function(e) {
@@ -45,8 +45,8 @@ function init() {
     });
   });
 
-  var onUpdate = function () {
-    var pos = this.pos;
+  let onUpdate = function () {
+    let pos = this.pos;
 
     // rotate the fingers
     mesh.skeleton.bones[5].rotation.set(0, 0, pos);

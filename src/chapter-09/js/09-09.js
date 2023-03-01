@@ -1,31 +1,31 @@
 function init() {
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
-  var scene = new THREE.Scene();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
+  let scene = new THREE.Scene();
   scene.add(new THREE.AmbientLight(0x333333));
   
   camera.position.set(0, 15, 70);
 
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
-  var mixer = new THREE.AnimationMixer();
-  var clipAction
-  var clipAction2
-  var frameMesh
-  var mesh
+  let mixer = new THREE.AnimationMixer();
+  let clipAction
+  let clipAction2
+  let frameMesh
+  let mesh
   
   initDefaultLighting(scene);
 
   function setupModel() {
     // initial cube
-    var cubeGeometry = new THREE.BoxGeometry(2, 2, 2);
-    var cubeMaterial = new THREE.MeshLambertMaterial({morphTargets: true, color: 0xff0000});
+    let cubeGeometry = new THREE.BoxGeometry(2, 2, 2);
+    let cubeMaterial = new THREE.MeshLambertMaterial({morphTargets: true, color: 0xff0000});
 
     // define morphtargets, we'll use the vertices from these geometries
-    var cubeTarget1 = new THREE.BoxGeometry(2, 20, 2);
-    var cubeTarget2 = new THREE.BoxGeometry(40, 2, 2);
+    let cubeTarget1 = new THREE.BoxGeometry(2, 20, 2);
+    let cubeTarget2 = new THREE.BoxGeometry(40, 2, 2);
 
     // define morphtargets and compute the morphnormal
     cubeGeometry.morphTargets[0] = {name: 't1', vertices: cubeGeometry.vertices};
@@ -33,7 +33,7 @@ function init() {
     cubeGeometry.morphTargets[2] = {name: 't3', vertices: cubeTarget1.vertices};
     cubeGeometry.computeMorphNormals();
 
-    var mesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    let mesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
     // position the cube
     mesh.position.x = 0;
@@ -56,17 +56,17 @@ function init() {
   }
 
   // control which keyframe to show
-  var controls1
-  var controls2
-  var mixerControls = {
+  let controls1
+  let controls2
+  let mixerControls = {
     time: 0,
     timeScale: 1,
     stopAllAction: function() {mixer.stopAllAction()},
   }
 
   function enableControls() {
-    var gui = new dat.GUI();
-    var mixerFolder = gui.addFolder("AnimationMixer")
+    let gui = new dat.GUI();
+    let mixerFolder = gui.addFolder("AnimationMixer")
     mixerFolder.add(mixerControls, "time").listen()
     mixerFolder.add(mixerControls, "timeScale", 0, 5).onChange(function (timeScale) {mixer.timeScale = timeScale});
     mixerFolder.add(mixerControls, "stopAllAction").listen()
@@ -79,7 +79,7 @@ function init() {
   render();
   function render() {
     stats.update();
-    var delta = clock.getDelta();
+    let delta = clock.getDelta();
     trackballControls.update(delta);
     requestAnimationFrame(render);
     renderer.render(scene, camera)

@@ -1,45 +1,45 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera(new THREE.Vector3(0, 20, 40));
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
-  var textureLoader = new THREE.TextureLoader();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera(new THREE.Vector3(0, 20, 40));
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
+  let textureLoader = new THREE.TextureLoader();
 
   // create a scene and add a light
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
   scene.background = textureLoader.load("../../assets/textures/bg/starry-deep-outer-space-galaxy.jpg");
-  var earthAndLight = addEarth(scene);
-  var earth = earthAndLight.earth;
-  var pivot = earthAndLight.pivot;
+  let earthAndLight = addEarth(scene);
+  let earth = earthAndLight.earth;
+  let pivot = earthAndLight.pivot;
 
   // setup effects
-  var renderPass = new THREE.RenderPass(scene, camera);
-  var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
+  let renderPass = new THREE.RenderPass(scene, camera);
+  let effectCopy = new THREE.ShaderPass(THREE.CopyShader);
   effectCopy.renderToScreen = true;
-  var bleachByPassFilter = new THREE.ShaderPass(THREE.BleachBypassShader);
-  var brightnessContrastShader = new THREE.ShaderPass(THREE.BrightnessContrastShader)
-  var colorifyShader = new THREE.ShaderPass(THREE.ColorifyShader);
-  var colorCorrectionShader = new THREE.ShaderPass(THREE.ColorCorrectionShader);
-  var freiChenShader = new THREE.ShaderPass(THREE.FreiChenShader);
-  var gammaCorrectionShader = new THREE.ShaderPass(THREE.GammaCorrectionShader);
-  var hueSaturationShader = new THREE.ShaderPass(THREE.HueSaturationShader);
-  var kaleidoShader = new THREE.ShaderPass(THREE.KaleidoShader);
-  var luminosityHighPassShader = new THREE.ShaderPass(THREE.LuminosityHighPassShader);
-  var luminosityShader = new THREE.ShaderPass(THREE.LuminosityShader);
-  var mirrorShader = new THREE.ShaderPass(THREE.MirrorShader);
-  var pixelShader = new THREE.ShaderPass(THREE.PixelShader);
+  let bleachByPassFilter = new THREE.ShaderPass(THREE.BleachBypassShader);
+  let brightnessContrastShader = new THREE.ShaderPass(THREE.BrightnessContrastShader)
+  let colorifyShader = new THREE.ShaderPass(THREE.ColorifyShader);
+  let colorCorrectionShader = new THREE.ShaderPass(THREE.ColorCorrectionShader);
+  let freiChenShader = new THREE.ShaderPass(THREE.FreiChenShader);
+  let gammaCorrectionShader = new THREE.ShaderPass(THREE.GammaCorrectionShader);
+  let hueSaturationShader = new THREE.ShaderPass(THREE.HueSaturationShader);
+  let kaleidoShader = new THREE.ShaderPass(THREE.KaleidoShader);
+  let luminosityHighPassShader = new THREE.ShaderPass(THREE.LuminosityHighPassShader);
+  let luminosityShader = new THREE.ShaderPass(THREE.LuminosityShader);
+  let mirrorShader = new THREE.ShaderPass(THREE.MirrorShader);
+  let pixelShader = new THREE.ShaderPass(THREE.PixelShader);
   pixelShader.uniforms.resolution.value = new THREE.Vector2(256, 256);
-  var rgbShiftShader = new THREE.ShaderPass(THREE.RGBShiftShader);
-  var sepiaShader = new THREE.ShaderPass(THREE.SepiaShader);
-  var sobelOperatorShader = new THREE.ShaderPass(THREE.SobelOperatorShader);
+  let rgbShiftShader = new THREE.ShaderPass(THREE.RGBShiftShader);
+  let sepiaShader = new THREE.ShaderPass(THREE.SepiaShader);
+  let sobelOperatorShader = new THREE.ShaderPass(THREE.SobelOperatorShader);
   sobelOperatorShader.uniforms.resolution.value = new THREE.Vector2(256, 256);
-  var vignetteShader = new THREE.ShaderPass(THREE.VignetteShader);
+  let vignetteShader = new THREE.ShaderPass(THREE.VignetteShader);
   
 
-  var composer = new THREE.EffectComposer(renderer);
+  let composer = new THREE.EffectComposer(renderer);
   composer.addPass(renderPass);
   composer.addPass(bleachByPassFilter);
   composer.addPass(brightnessContrastShader);
@@ -60,8 +60,8 @@ function init() {
   composer.addPass(effectCopy);
 
   // setup controls
-  var gui = new dat.GUI();
-  var controls = {};
+  let gui = new dat.GUI();
+  let controls = {};
 
   addShaderControl(gui, "BleachBypass", bleachByPassFilter, { floats: [{ key: "opacity", from: 0, to: 2, step: 0.01 }]})
   addShaderControl(gui, "BrightnessContrast", brightnessContrastShader, { floats: [ { key: "brightness", from: 0, to: 1, step: 0.01 }, { key: "contrast", from: 0, to: 1, step: 0.01 } ] })
@@ -90,7 +90,7 @@ function init() {
   render();
   function render() {
     stats.update();
-    var delta = clock.getDelta();
+    let delta = clock.getDelta();
     trackballControls.update(delta);
     earth.rotation.y += 0.001;
     pivot.rotation.y += -0.0003;

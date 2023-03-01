@@ -1,13 +1,13 @@
 function init() {
 
-  var stats = initStats();
-  var camera = initCamera(new THREE.Vector3(20, 0, 150));
-  var scene = new THREE.Scene();
-  var webGLRenderer = initRenderer();
+  let stats = initStats();
+  let camera = initCamera(new THREE.Vector3(20, 0, 150));
+  let scene = new THREE.Scene();
+  let webGLRenderer = initRenderer();
 
-  var cloud;
+  let cloud;
 
-  var controls = new function () {
+  let controls = new function () {
     this.size = 15;
     this.transparent = true;
     this.opacity = 0.6;
@@ -24,7 +24,7 @@ function init() {
     };
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'size', 0, 20).onChange(controls.redraw);
   gui.add(controls, 'transparent').onChange(controls.redraw);
   gui.add(controls, 'opacity', 0, 1).onChange(controls.redraw);
@@ -37,9 +37,9 @@ function init() {
 
   function createPoints(size, transparent, opacity, sizeAttenuation, color) {
 
-    var geom = new THREE.Geometry();
+    let geom = new THREE.Geometry();
 
-    var material = new THREE.PointsMaterial({
+    let material = new THREE.PointsMaterial({
       size: size,
       transparent: transparent,
       opacity: opacity,
@@ -48,9 +48,9 @@ function init() {
       color: color
     });
 
-    var range = 500;
-    for (var i = 0; i < 5000; i++) {
-      var particle = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2,
+    let range = 500;
+    for (let i = 0; i < 5000; i++) {
+      let particle = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2,
         Math.random() * range - range / 2);
       geom.vertices.push(particle);
     }
@@ -60,7 +60,7 @@ function init() {
     scene.add(cloud);
   }
 
-  var step = 0;
+  let step = 0;
 
   function render() {
     stats.update();

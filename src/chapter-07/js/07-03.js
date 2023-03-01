@@ -1,18 +1,18 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
-  var scene = new THREE.Scene();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
+  let scene = new THREE.Scene();
 
   camera.position.set(20, 0, 150);
 
-  var cloud;
+  let cloud;
 
-  var controls = new function () {
+  let controls = new function () {
     this.size = 4;
     this.transparent = true;
     this.opacity = 0.6;
@@ -34,7 +34,7 @@ function init() {
     };
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'size', 0, 10).onChange(controls.redraw);
   gui.add(controls, 'transparent').onChange(controls.redraw);
   gui.add(controls, 'opacity', 0, 1).onChange(controls.redraw);
@@ -50,8 +50,8 @@ function init() {
 
   function createParticles(size, transparent, opacity, vertexColors, sizeAttenuation, colorValue, vertexColorValue) {
     
-    var geom = new THREE.Geometry();
-    var material = new THREE.PointsMaterial({
+    let geom = new THREE.Geometry();
+    let material = new THREE.PointsMaterial({
       size: size,
       transparent: transparent,
       opacity: opacity,
@@ -62,13 +62,13 @@ function init() {
     });
 
 
-    var range = 500;
-    for (var i = 0; i < 15000; i++) {
-      var particle = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2,
+    let range = 500;
+    for (let i = 0; i < 15000; i++) {
+      let particle = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2,
         Math.random() * range - range / 2);
       geom.vertices.push(particle);
-      var color = new THREE.Color(vertexColorValue);
-      var asHSL = {};
+      let color = new THREE.Color(vertexColorValue);
+      let asHSL = {};
       color.getHSL(asHSL);
       color.setHSL(asHSL.h, asHSL.s, asHSL.l * Math.random());
       geom.colors.push(color);
@@ -80,7 +80,7 @@ function init() {
     scene.add(cloud);
   }
 
-  var step = 0;
+  let step = 0;
 
   function render() {
     stats.update();

@@ -1,33 +1,33 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera(new THREE.Vector3(0, 20, 40));
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera(new THREE.Vector3(0, 20, 40));
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   // and add some simple default lights
-  var scene = new THREE.Scene();
-  var groundPlane = addLargeGroundPlane(scene)
+  let scene = new THREE.Scene();
+  let groundPlane = addLargeGroundPlane(scene)
   groundPlane.position.y = -10;
   initDefaultLighting(scene);
   scene.add(new THREE.AmbientLight(0x444444));
 
-  var textureLoader = new THREE.TGALoader();
-  var gui = new dat.GUI();
-  var controls = {};
+  let textureLoader = new THREE.TGALoader();
+  let gui = new dat.GUI();
+  let controls = {};
 
-  var polyhedron = new THREE.IcosahedronGeometry(8, 0);
-  var polyhedronMesh = addGeometry(scene, polyhedron, 'polyhedron', textureLoader.load('../../assets/textures/tga/dried_grass.tga'), gui, controls);
+  let polyhedron = new THREE.IcosahedronGeometry(8, 0);
+  let polyhedronMesh = addGeometry(scene, polyhedron, 'polyhedron', textureLoader.load('../../assets/textures/tga/dried_grass.tga'), gui, controls);
   polyhedronMesh.position.x = 20;
 
-  var sphere = new THREE.SphereGeometry(5, 20, 20)
-  var sphereMesh = addGeometry(scene, sphere, 'sphere', textureLoader.load('../../assets/textures/tga/grass.tga'), gui, controls);
+  let sphere = new THREE.SphereGeometry(5, 20, 20)
+  let sphereMesh = addGeometry(scene, sphere, 'sphere', textureLoader.load('../../assets/textures/tga/grass.tga'), gui, controls);
 
-  var cube = new THREE.BoxGeometry(10, 10, 10)
-  var cubeMesh = addGeometry(scene, cube, 'cube', textureLoader.load('../../assets/textures/tga/moss.tga'), gui, controls);
+  let cube = new THREE.BoxGeometry(10, 10, 10)
+  let cubeMesh = addGeometry(scene, cube, 'cube', textureLoader.load('../../assets/textures/tga/moss.tga'), gui, controls);
   cubeMesh.position.x = -20;
 
   render();

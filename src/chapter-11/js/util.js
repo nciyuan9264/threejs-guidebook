@@ -1,11 +1,11 @@
 function addGeometry(scene, geom, name, texture, gui, controls) {
-  var mat = new THREE.MeshStandardMaterial(
+  let mat = new THREE.MeshStandardMaterial(
     {
       map: texture,
       metalness: 0.2,
       roughness: 0.07
   });
-  var mesh = new THREE.Mesh(geom, mat);
+  let mesh = new THREE.Mesh(geom, mat);
   mesh.castShadow = true;
   
   scene.add(mesh);
@@ -16,7 +16,7 @@ function addGeometry(scene, geom, name, texture, gui, controls) {
 };
 
 function addGeometryWithMaterial(scene, geom, name, gui, controls, material) {
-  var mesh = new THREE.Mesh(geom, material);
+  let mesh = new THREE.Mesh(geom, material);
   mesh.castShadow = true;
   
   scene.add(mesh);
@@ -27,8 +27,8 @@ function addGeometryWithMaterial(scene, geom, name, gui, controls, material) {
 };
 
 function addEarth(scene) {
-  var textureLoader = new THREE.TextureLoader();
-  var planetMaterial = new THREE.MeshPhongMaterial({
+  let textureLoader = new THREE.TextureLoader();
+  let planetMaterial = new THREE.MeshPhongMaterial({
     map: textureLoader.load("../../assets/textures/earth/Earth.png"),
     normalMap: textureLoader.load("../../assets/textures/earth/EarthNormal.png"),
     specularMap: textureLoader.load("../../assets/textures/earth/EarthSpec.png"),
@@ -37,9 +37,9 @@ function addEarth(scene) {
     shininess: 0.5
   });
   
-  var earth = new THREE.Mesh(new THREE.SphereGeometry(15, 40, 40), planetMaterial);
+  let earth = new THREE.Mesh(new THREE.SphereGeometry(15, 40, 40), planetMaterial);
   scene.add(earth);
-  var pivot = new THREE.Object3D();
+  let pivot = new THREE.Object3D();
   initDefaultLighting(pivot);
   scene.add(pivot);
 
@@ -47,17 +47,17 @@ function addEarth(scene) {
 }
 
 function addMars(scene) {
-  var textureLoader = new THREE.TextureLoader();
-  var planetMaterial = new THREE.MeshPhongMaterial({
+  let textureLoader = new THREE.TextureLoader();
+  let planetMaterial = new THREE.MeshPhongMaterial({
     map: textureLoader.load("../../assets/textures/mars/mars_1k_color.jpg"),
     normalMap: textureLoader.load("../../assets/textures/mars/mars_1k_normal.jpg"),
     normalScale: new THREE.Vector2(6,6),
     shininess: 0.5
   });
   
-  var mars = new THREE.Mesh(new THREE.SphereGeometry(15, 40, 40), planetMaterial);
+  let mars = new THREE.Mesh(new THREE.SphereGeometry(15, 40, 40), planetMaterial);
   scene.add(mars);
-  var pivot = new THREE.Object3D();
+  let pivot = new THREE.Object3D();
   initDefaultLighting(pivot);
   scene.add(pivot);
 
@@ -79,7 +79,7 @@ function addFilmPassControls(gui, controls, effectFilm) {
       if ( controls.scanlinesCount !== undefined ) effectFilm.uniforms.sCount.value = controls.scanlinesCount;    
     }
 
-  var filmFolder = gui.addFolder("FilmPass");
+  let filmFolder = gui.addFolder("FilmPass");
   filmFolder.add(controls, "grayScale").onChange(controls.updateFilmPass);
   filmFolder.add(controls, "noiseIntensity", 0, 1, 0.01).onChange(controls.updateFilmPass);
   filmFolder.add(controls, "scanlinesIntensity", 0, 1, 0.01).onChange(controls.updateFilmPass);
@@ -93,11 +93,11 @@ function addBloomPassControls(gui, controls, bloom, callback) {
   controls.resolution = 256;
 
   controls.updateBloomPass = function() {
-    var bloomPass = new THREE.BloomPass(controls.strength, controls.kernelSize, controls.sigma, controls.resolution);
+    let bloomPass = new THREE.BloomPass(controls.strength, controls.kernelSize, controls.sigma, controls.resolution);
     callback(bloomPass);
   }
 
-  var bloomFolder = gui.addFolder("BloomPass");
+  let bloomFolder = gui.addFolder("BloomPass");
   bloomFolder.add(controls, "strength", 0, 5, 0.01).onChange(controls.updateBloomPass);
   bloomFolder.add(controls, "kernelSize", 10, 100, 1).onChange(controls.updateBloomPass);
   bloomFolder.add(controls, "sigma", 1, 8, 0.1).onChange(controls.updateBloomPass);
@@ -117,7 +117,7 @@ function addDotScreenPassControls(gui, controls, dotscreen) {
     dotscreen.uniforms["scale"].value = controls.scale;
   }
 
-  var dsFolder = gui.addFolder("DotScreenPass");
+  let dsFolder = gui.addFolder("DotScreenPass");
   dsFolder.add(controls, "centerX", 0, 5, 0.01).onChange(controls.updateDotScreen);
   dsFolder.add(controls, "centerY", 0, 5, 0.01).onChange(controls.updateDotScreen);
   dsFolder.add(controls, "angle", 0, 3.14, 0.01).onChange(controls.updateDotScreen);
@@ -126,7 +126,7 @@ function addDotScreenPassControls(gui, controls, dotscreen) {
 
 function addGlitchPassControls(gui, controls, glitchPass, callback) {
   controls.dtsize = 64;
-  var gpFolder = gui.addFolder("GlitchPass");
+  let gpFolder = gui.addFolder("GlitchPass");
   gpFolder.add(controls,"dtsize", 0, 1024).onChange(function(e) { callback(new THREE.GlitchPass(e)) })
 }
 
@@ -145,11 +145,11 @@ function addHalftonePassControls(gui, controls, htshader, callback) {
   controls.greyscale = false;
 
   function applyParams() {
-    var newPass = new THREE.HalftonePass(controls.width, controls.height, controls);
+    let newPass = new THREE.HalftonePass(controls.width, controls.height, controls);
     callback(newPass);
   }
 
-  var htFolder = gui.addFolder("HalfTonePass");
+  let htFolder = gui.addFolder("HalfTonePass");
   htFolder.add(controls, "shape", {dot: 1, ellipse: 2, line: 3, square: 4}).onChange(applyParams);
   htFolder.add(controls, "radius", 0, 40, 0.1).onChange(applyParams);
   htFolder.add(controls, "rotateR", 0, Math.PI*2, 0.1).onChange(applyParams);
@@ -171,13 +171,13 @@ function addOutlinePassControls(gui, controls, outlinePass) {
   controls.pulsePeriod = 0,
   controls.usePatternTexture = false
 
-  var folder = gui.addFolder("OutlinePass");
+  let folder = gui.addFolder("OutlinePass");
   folder.add( controls, 'edgeStrength', 0.01, 10 ).onChange( function ( value ) { outlinePass.edgeStrength = Number( value );});
   folder.add( controls, 'edgeGlow', 0.0, 1 ).onChange( function ( value ) { outlinePass.edgeGlow = Number( value );});
   folder.add( controls, 'edgeThickness', 1, 4 ).onChange( function ( value ) { outlinePass.edgeThickness = Number( value );});
   folder.add( controls, 'pulsePeriod', 0.0, 5 ).onChange( function ( value ) { outlinePass.pulsePeriod = Number( value );});
 
-  var colors = {
+  let colors = {
     visibleEdgeColor: '#ffffff',
     hiddenEdgeColor: '#190a05'
   };
@@ -193,12 +193,12 @@ function addUnrealBloomPassControls(gui, controls, bloomPass, callback) {
   controls.threshold = 0.1;
 
   function newBloom() {
-    var newPass = new THREE.UnrealBloomPass(new THREE.Vector2(controls.resolution, controls.resolution), controls.strength, controls.radius, controls.threshold)
+    let newPass = new THREE.UnrealBloomPass(new THREE.Vector2(controls.resolution, controls.resolution), controls.strength, controls.radius, controls.threshold)
     console.log(newPass)
     callback(newPass);
   }
 
-  var folder = gui.addFolder("UnrealBloom");
+  let folder = gui.addFolder("UnrealBloom");
   folder.add( controls, 'resolution', 2, 1024, 2).onChange(newBloom);
   folder.add( controls, 'strength', 0, 10, 0.1).onChange(newBloom);
   folder.add( controls, 'radius', 0, 10, 0.01).onChange(newBloom);
@@ -207,14 +207,14 @@ function addUnrealBloomPassControls(gui, controls, bloomPass, callback) {
 
 function addSepiaShaderControls(gui, controls, shaderPass) {
   controls.amount = 1;
-  var folder = gui.addFolder("SepiaShader");
+  let folder = gui.addFolder("SepiaShader");
   folder.add( controls, "amount", 0, 10, 0.1).onChange(function(e) {
     shaderPass.uniforms["amount"].value = e;
   });
 }
 
 function addColorifyShaderControls(gui, controls, shaderPass) {
-  var folder = gui.addFolder("ColorifyShader");
+  let folder = gui.addFolder("ColorifyShader");
   controls.color = 0xffffff;
 
   folder.addColor( controls, 'color' ).onChange( function ( value ) {  
@@ -230,19 +230,19 @@ function addShaderControl(gui, folderName, shaderPass, toSet, enabled) {
   }
 
   function addUniformBool(folder, key, shader) {
-    var localControls = {}
+    let localControls = {}
     localControls[key] = uniformOrDefault(shader.uniforms, key, 0);
     folder.add(localControls, key).onChange(function(v) {shader.uniforms[key].value = v}); 
   }
 
   function addUniformFloat(folder, key, from, to, step, shader) {
-    var localControls = {}
+    let localControls = {}
     localControls[key] = uniformOrDefault(shader.uniforms, key, 0);
     folder.add(localControls, key, from, to, step).onChange(function(v) {shader.uniforms[key].value = v});
   }
 
   function addUniformColor(folder, key, shader) {
-    var localControls = {}
+    let localControls = {}
     localControls[key] = uniformOrDefault(shader.uniforms, key, new THREE.Color(0xffffff));
     folder.addColor( localControls, key ).onChange( function ( value ) {  
       shader.uniforms[key].value = new THREE.Color().setRGB(value.r / 255, value.g / 255, value.b / 255);
@@ -251,10 +251,10 @@ function addShaderControl(gui, folderName, shaderPass, toSet, enabled) {
   }
 
   function addUniformVector3(folder, key, shader, from, to, step) {
-    var startValue = uniformOrDefault(shader.uniforms, key, new THREE.Vector3(0, 0, 0));
-    var keyX = key + "_x";
-    var keyY = key + "_y";
-    var keyZ = key + "_z";
+    let startValue = uniformOrDefault(shader.uniforms, key, new THREE.Vector3(0, 0, 0));
+    let keyX = key + "_x";
+    let keyY = key + "_y";
+    let keyZ = key + "_z";
 
     localControls = {};
     localControls[keyX] = startValue.x;
@@ -267,11 +267,11 @@ function addShaderControl(gui, folderName, shaderPass, toSet, enabled) {
   }
 
   function addUniformVector2(folder, key, shader, from, to, step) {
-    var startValue = uniformOrDefault(shader.uniforms, key, new THREE.Vector2(0, 0));
+    let startValue = uniformOrDefault(shader.uniforms, key, new THREE.Vector2(0, 0));
     shader.uniforms[key].value = startValue;
 
-    var keyX = key + "_x";
-    var keyY = key + "_y";
+    let keyX = key + "_x";
+    let keyY = key + "_y";
 
     localControls = {};
     localControls[keyX] = startValue.x;
@@ -282,7 +282,7 @@ function addShaderControl(gui, folderName, shaderPass, toSet, enabled) {
   }
 
   // create the folder and set enabled
-  var folder = gui.addFolder(folderName);
+  let folder = gui.addFolder(folderName);
   if (toSet.setEnabled !== undefined ? toSet.setEnabled : true) {
     shaderPass.enabled = enabled !== undefined ? enabled : false;
     folder.add(shaderPass, "enabled");  
@@ -290,9 +290,9 @@ function addShaderControl(gui, folderName, shaderPass, toSet, enabled) {
 
   if (toSet.floats !== undefined) {
     toSet.floats.forEach(function (p) {
-      var from = p.from !== undefined ? p.from : 0;
-      var to = p.from !== undefined ? p.to : 1;
-      var step = p.from !== undefined ? p.step : 0.01;
+      let from = p.from !== undefined ? p.from : 0;
+      let to = p.from !== undefined ? p.to : 1;
+      let step = p.from !== undefined ? p.step : 0.01;
       addUniformFloat(folder, p.key, from, to, step, shaderPass)
     });
   }

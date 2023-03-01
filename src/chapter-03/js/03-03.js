@@ -1,57 +1,57 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
+  let stats = initStats();
+  let renderer = initRenderer();
 
-  var camera = initCamera();
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let camera = initCamera();
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
   // add a simple scene
   addHouseAndTree(scene)
 
   // add subtle ambient lighting
-  var ambientLight = new THREE.AmbientLight("#0c0c0c");
+  let ambientLight = new THREE.AmbientLight("#0c0c0c");
   scene.add(ambientLight);
 
   // the point light where working with
-  var pointColor = "#ccffcc";
-  var pointLight = new THREE.PointLight(pointColor);
+  let pointColor = "#ccffcc";
+  let pointLight = new THREE.PointLight(pointColor);
   pointLight.decay = 0.1
 
   pointLight.castShadow = true;
 
   scene.add(pointLight);
 
-  var helper = new THREE.PointLightHelper(pointLight);
+  let helper = new THREE.PointLightHelper(pointLight);
   // scene.add(helper);
 
-  var shadowHelper = new THREE.CameraHelper(pointLight.shadow.camera)
+  let shadowHelper = new THREE.CameraHelper(pointLight.shadow.camera)
   // scene.add(shadowHelper)
 
 
 
   // add a small sphere simulating the pointlight
-  var sphereLight = new THREE.SphereGeometry(0.2);
-  var sphereLightMaterial = new THREE.MeshBasicMaterial({
+  let sphereLight = new THREE.SphereGeometry(0.2);
+  let sphereLightMaterial = new THREE.MeshBasicMaterial({
     color: 0xac6c25
   });
-  var sphereLightMesh = new THREE.Mesh(sphereLight, sphereLightMaterial);
+  let sphereLightMesh = new THREE.Mesh(sphereLight, sphereLightMaterial);
   sphereLightMesh.position = new THREE.Vector3(3, 0, 5);
   scene.add(sphereLightMesh);
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
   // used to determine the switch point for the light animation
-  var invert = 1;
-  var phase = 0;
+  let invert = 1;
+  let phase = 0;
 
-  var controls = setupControls();
+  let controls = setupControls();
   render();
 
   function render() {
@@ -75,7 +75,7 @@ function init() {
     sphereLightMesh.position.y = 5;
 
     if (invert < 0) {
-      var pivot = 14;
+      let pivot = 14;
       sphereLightMesh.position.x = (invert * (sphereLightMesh.position.x - pivot)) + pivot;
     }
 
@@ -86,7 +86,7 @@ function init() {
   }
 
   function setupControls() {
-    var controls = new function () {
+    let controls = new function () {
       this.rotationSpeed = 0.01;
       this.bouncingSpeed = 0.03;
       this.ambientColor = ambientLight.color.getStyle();;
@@ -97,7 +97,7 @@ function init() {
 
     
 
-    var gui = new dat.GUI();
+    let gui = new dat.GUI();
     gui.addColor(controls, 'ambientColor').onChange(function (e) {
       ambientLight.color = new THREE.Color(e);
     });

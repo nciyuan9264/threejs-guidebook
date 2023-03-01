@@ -1,27 +1,27 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   // and add some simple default lights
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
   initDefaultLighting(scene);
-  var groundPlane = addLargeGroundPlane(scene)
+  let groundPlane = addLargeGroundPlane(scene)
   groundPlane.position.y = -30;
 
   // setup the control parts of the ui
-  var controls = new function () {
-    var self = this;
+  let controls = new function () {
+    let self = this;
 
     // the start geometry and material. Used as the base for the settings in the control UI
     this.appliedMaterial = applyMeshNormalMaterial
     this.castShadow = true;
     this.groundPlaneVisible = true;
 
-    var baseGeom = new THREE.TorusKnotGeometry();
+    let baseGeom = new THREE.TorusKnotGeometry();
 
     this.radius = baseGeom.parameters.radius ? baseGeom.parameters.radius : 1;
     this.tube = 0.3;
@@ -41,7 +41,7 @@ function init() {
   };
 
   // create the GUI with the specific settings for this geometry
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'radius', 0, 10).onChange(controls.redraw);
   gui.add(controls, 'tube', 0, 10).onChange(controls.redraw);
   gui.add(controls, 'radialSegments', 0, 400).step(1).onChange(controls.redraw);
@@ -60,7 +60,7 @@ function init() {
 
   // initialize the first redraw so everything gets initialized
   controls.redraw();
-  var step = 0;
+  let step = 0;
   // call the render function
   render();
   function render() {

@@ -1,19 +1,19 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var webGLRenderer = initRenderer();
-  var scene = new THREE.Scene();
-  var camera = initCamera(new THREE.Vector3(-30, 40, 50));
-  var stats = initStats();
+  let stats = initStats();
+  let webGLRenderer = initRenderer();
+  let scene = new THREE.Scene();
+  let camera = initCamera(new THREE.Vector3(-30, 40, 50));
+  let stats = initStats();
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
-  var knot;
+  let knot;
 
   // setup the control gui
-  var controls = new function () {
+  let controls = new function () {
     // we need the first child, since it's a multimaterial
     this.radius = 13;
     this.tube = 1.7;
@@ -28,7 +28,7 @@ function init() {
       // remove the old plane
       if (knot) scene.remove(knot);
       // create a new one
-      var geom = new THREE.TorusKnotGeometry(controls.radius, controls.tube, Math.round(controls.radialSegments), Math.round(controls.tubularSegments), Math.round(controls.p), Math.round(controls.q));
+      let geom = new THREE.TorusKnotGeometry(controls.radius, controls.tube, Math.round(controls.radialSegments), Math.round(controls.tubularSegments), Math.round(controls.p), Math.round(controls.q));
 
       if (controls.asParticles) {
         knot = createPoints(geom);
@@ -42,7 +42,7 @@ function init() {
 
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'radius', 0, 40).onChange(controls.redraw);
   gui.add(controls, 'tube', 0, 40).onChange(controls.redraw);
   gui.add(controls, 'radialSegments', 0, 400).step(1).onChange(controls.redraw);
@@ -59,12 +59,12 @@ function init() {
   // from THREE.js examples
   function generateSprite() {
 
-    var canvas = document.createElement('canvas');
+    let canvas = document.createElement('canvas');
     canvas.width = 16;
     canvas.height = 16;
 
-    var context = canvas.getContext('2d');
-    var gradient = context.createRadialGradient(canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2);
+    let context = canvas.getContext('2d');
+    let gradient = context.createRadialGradient(canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2);
     gradient.addColorStop(0, 'rgba(255,255,255,1)');
     gradient.addColorStop(0.2, 'rgba(0,255,255,1)');
     gradient.addColorStop(0.4, 'rgba(0,0,64,1)');
@@ -73,14 +73,14 @@ function init() {
     context.fillStyle = gradient;
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    var texture = new THREE.Texture(canvas);
+    let texture = new THREE.Texture(canvas);
     texture.needsUpdate = true;
     return texture;
 
   }
 
   function createPoints(geom) {
-    var material = new THREE.PointsMaterial({
+    let material = new THREE.PointsMaterial({
       color: 0xffffff,
       size: 3,
       transparent: true,
@@ -89,7 +89,7 @@ function init() {
       depthWrite: false // instead of sortParticles
     });
 
-    var cloud = new THREE.Points(geom, material);
+    let cloud = new THREE.Points(geom, material);
     return cloud;
   }
 

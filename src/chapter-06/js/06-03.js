@@ -1,22 +1,22 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   // and add some simple default lights
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
   initDefaultLighting(scene);
-  var groundPlane = addLargeGroundPlane(scene)
+  let groundPlane = addLargeGroundPlane(scene)
   groundPlane.position.y = -30;
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
   // setup the control gui
-  var controls = new function () {
+  let controls = new function () {
 
     this.appliedMaterial = applyMeshNormalMaterial
     this.castShadow = true;
@@ -34,7 +34,7 @@ function init() {
     // redraw function, updates the control UI and recreates the geometry.
     this.redraw = function () {
       redrawGeometryAndUpdateUI(gui, scene, controls, function() {
-        var options = {
+        let options = {
           amount: controls.amount,
           bevelThickness: controls.bevelThickness,
           bevelSize: controls.bevelSize,
@@ -44,7 +44,7 @@ function init() {
           steps: controls.steps
         };
   
-        var geom = new THREE.ExtrudeGeometry(drawShape(), options);
+        let geom = new THREE.ExtrudeGeometry(drawShape(), options);
         geom.applyMatrix(new THREE.Matrix4().makeTranslation(-20, 0, 0));
         geom.applyMatrix(new THREE.Matrix4().makeScale(0.4,0.4,0.4));
         return geom
@@ -52,7 +52,7 @@ function init() {
     };
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'amount', 0, 20).onChange(controls.redraw);
   gui.add(controls, 'bevelThickness', 0, 10).onChange(controls.redraw);
   gui.add(controls, 'bevelSize', 0, 10).onChange(controls.redraw);
@@ -73,7 +73,7 @@ function init() {
   function drawShape() {
 
     // create a basic shape
-    var shape = new THREE.Shape();
+    let shape = new THREE.Shape();
 
     // startpoint
     shape.moveTo(10, 10);
@@ -95,17 +95,17 @@ function init() {
     shape.quadraticCurveTo(20, 15, 10, 10);
 
     // add 'eye' hole one
-    var hole1 = new THREE.Path();
+    let hole1 = new THREE.Path();
     hole1.absellipse(16, 24, 2, 3, 0, Math.PI * 2, true);
     shape.holes.push(hole1);
 
     // add 'eye hole 2'
-    var hole2 = new THREE.Path();
+    let hole2 = new THREE.Path();
     hole2.absellipse(23, 24, 2, 3, 0, Math.PI * 2, true);
     shape.holes.push(hole2);
 
     // add 'mouth'
-    var hole3 = new THREE.Path();
+    let hole3 = new THREE.Path();
     hole3.absarc(20, 16, 2, 0, Math.PI, true);
     shape.holes.push(hole3);
 
@@ -113,7 +113,7 @@ function init() {
     return shape;
   }
 
-  var step = 0;
+  let step = 0;
   controls.redraw();
   render();
   

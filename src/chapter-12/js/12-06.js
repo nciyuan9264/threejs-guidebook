@@ -4,21 +4,21 @@ function init() {
   Physijs.scripts.ammo = './ammo.js';
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera(new THREE.Vector3(10, 10, 10));
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera(new THREE.Vector3(10, 10, 10));
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
   scene = new Physijs.Scene({reportSize: 10, fixedTimeStep: 1 / 60});
   scene.setGravity(new THREE.Vector3(0, -10, 0));
 
   initDefaultLighting(scene);
 
   createGroundAndWalls(scene);
-  var car = createCar(scene);
+  let car = createCar(scene);
   scene.simulate();
 
-  var controls = new function () {
+  let controls = new function () {
     this.velocity = -2;
     this.wheelAngle = 0.5;
 
@@ -44,7 +44,7 @@ function init() {
 
 };
 
-var gui = new dat.GUI();
+let gui = new dat.GUI();
 gui.add(controls, 'velocity', -10, 10).onChange(controls.changeVelocity);
 gui.add(controls, 'wheelAngle', -1, 1).onChange(controls.changeOrientation);
 gui.add(controls, 'loosenXRight', 0, 0.5).step(0.01).onChange(controls.changeOrientation);
@@ -55,7 +55,7 @@ controls.loosenXRight = 0;
   render();
   function render() {
     stats.update();
-    var delta = clock.getDelta();
+    let delta = clock.getDelta();
     trackballControls.update(delta);
     requestAnimationFrame(render);
     renderer.render(scene, camera);
@@ -64,25 +64,25 @@ controls.loosenXRight = 0;
 }
 
 function createCar(scene) {
-  var car = {};
-  var car_material = Physijs.createMaterial(
+  let car = {};
+  let car_material = Physijs.createMaterial(
           new THREE.MeshLambertMaterial({color: 0xff4444, opacity: 0.9, transparent: true}),
           .5, // high friction
           .5 // medium restitution
   );
 
   // create the car body
-  var geom = new THREE.BoxGeometry(15, 4, 4);
-  var body = new Physijs.BoxMesh(geom, car_material, 500);
+  let geom = new THREE.BoxGeometry(15, 4, 4);
+  let body = new Physijs.BoxMesh(geom, car_material, 500);
   body.position.set(5, 5, 5);
   body.castShadow = true;
   scene.add(body);
 
   // create the wheels
-  var fr = createWheel(new THREE.Vector3(0, 4, 10));
-  var fl = createWheel(new THREE.Vector3(0, 4, 0));
-  var rr = createWheel(new THREE.Vector3(10, 4, 10));
-  var rl = createWheel(new THREE.Vector3(10, 4, 0));
+  let fr = createWheel(new THREE.Vector3(0, 4, 10));
+  let fl = createWheel(new THREE.Vector3(0, 4, 0));
+  let rr = createWheel(new THREE.Vector3(10, 4, 10));
+  let rl = createWheel(new THREE.Vector3(10, 4, 0));
 
   // add the wheels to the scene
   scene.add(fr);
@@ -90,16 +90,16 @@ function createCar(scene) {
   scene.add(rr);
   scene.add(rl);
 
-  var frConstraint = createWheelConstraint(fr, body, new THREE.Vector3(0, 4, 8));
+  let frConstraint = createWheelConstraint(fr, body, new THREE.Vector3(0, 4, 8));
   scene.addConstraint(frConstraint);
 
-  var flConstraint = createWheelConstraint(fl, body, new THREE.Vector3(0, 4, 2));
+  let flConstraint = createWheelConstraint(fl, body, new THREE.Vector3(0, 4, 2));
   scene.addConstraint(flConstraint);
 
-  var rrConstraint = createWheelConstraint(rr, body, new THREE.Vector3(10, 4, 8));
+  let rrConstraint = createWheelConstraint(rr, body, new THREE.Vector3(10, 4, 8));
   scene.addConstraint(rrConstraint);
 
-  var rlConstraint = createWheelConstraint(rl, body, new THREE.Vector3(10, 4, 2));
+  let rlConstraint = createWheelConstraint(rl, body, new THREE.Vector3(10, 4, 2));
   scene.addConstraint(rlConstraint);
 
 
@@ -145,21 +145,21 @@ function createCar(scene) {
 }
 
 function createWheelConstraint(wheel, body, position) {
-  var constraint = new Physijs.DOFConstraint(
+  let constraint = new Physijs.DOFConstraint(
           wheel, body, position);
 
   return constraint;
 }
 
 function createWheel(position) {
-  var wheel_material = Physijs.createMaterial(
+  let wheel_material = Physijs.createMaterial(
           new THREE.MeshLambertMaterial({color: 0x444444, opacity: 0.9, transparent: true}),
           1.0, // high friction
           .5 // medium restitution
   );
 
-  var wheel_geometry = new THREE.CylinderGeometry(4, 4, 2, 10);
-  var wheel = new Physijs.CylinderMesh(
+  let wheel_geometry = new THREE.CylinderGeometry(4, 4, 2, 10);
+  let wheel = new Physijs.CylinderMesh(
           wheel_geometry,
           wheel_material,
           100
@@ -172,23 +172,23 @@ function createWheel(position) {
 }
 
 function createGroundAndWalls(scene) {
-  var ground_material = Physijs.createMaterial(new THREE.MeshPhongMaterial({map: THREE.ImageUtils.loadTexture('../../assets/textures/general/floor-wood.jpg')}), 0.9, 0.7);
-  var ground = new Physijs.BoxMesh(new THREE.BoxGeometry(50, 1, 80), ground_material, 0);
+  let ground_material = Physijs.createMaterial(new THREE.MeshPhongMaterial({map: THREE.ImageUtils.loadTexture('../../assets/textures/general/floor-wood.jpg')}), 0.9, 0.7);
+  let ground = new Physijs.BoxMesh(new THREE.BoxGeometry(50, 1, 80), ground_material, 0);
   scene.add(ground);
-  var wall_material = Physijs.createMaterial(new THREE.MeshBasicMaterial({transparent: true, opacity: 0.1}), 0.9, 0.7);
-  var wall1 = new  Physijs.BoxMesh(new THREE.BoxGeometry(1, 100, 80), wall_material, 0);
+  let wall_material = Physijs.createMaterial(new THREE.MeshBasicMaterial({transparent: true, opacity: 0.1}), 0.9, 0.7);
+  let wall1 = new  Physijs.BoxMesh(new THREE.BoxGeometry(1, 100, 80), wall_material, 0);
   wall1.position.x = -25;
   wall1.position.y = 50;
   scene.add(wall1);
-  var wall2 = new  Physijs.BoxMesh(new THREE.BoxGeometry(1, 100, 80), wall_material, 0);
+  let wall2 = new  Physijs.BoxMesh(new THREE.BoxGeometry(1, 100, 80), wall_material, 0);
   wall2.position.x = 25; 
   wall2.position.y = 50;
   scene.add(wall2);
-  var wall3 = new  Physijs.BoxMesh(new THREE.BoxGeometry(50, 100, 1), wall_material, 0);
+  let wall3 = new  Physijs.BoxMesh(new THREE.BoxGeometry(50, 100, 1), wall_material, 0);
   wall3.position.y = 50;
   wall3.position.z = -40; 
   scene.add(wall3);
-  var wall4 = new  Physijs.BoxMesh(new THREE.BoxGeometry(50, 100, 1), wall_material, 0);
+  let wall4 = new  Physijs.BoxMesh(new THREE.BoxGeometry(50, 100, 1), wall_material, 0);
   wall4.position.y = 50;
   wall4.position.z = 40; 
   scene.add(wall4);

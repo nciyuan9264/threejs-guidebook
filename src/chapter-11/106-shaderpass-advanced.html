@@ -43,18 +43,18 @@
     // once everything is loaded, we run our Three.js stuff.
     function init() {
 
-        var scale = chroma.scale(['white', 'blue']);
+        let scale = chroma.scale(['white', 'blue']);
 
-        var stats = initStats();
+        let stats = initStats();
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
-        var scene = new THREE.Scene();
+        let scene = new THREE.Scene();
 
         // create a camera, which defines where we're looking at.
-        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
         // create a render and set the size
-        var webGLRenderer = new THREE.WebGLRenderer();
+        let webGLRenderer = new THREE.WebGLRenderer();
         webGLRenderer.setClearColor(new THREE.Color(0xaaaaff, 1.0));
         webGLRenderer.setSize(window.innerWidth, window.innerHeight);
         webGLRenderer.shadowMapEnabled = true;
@@ -67,13 +67,13 @@
         camera.position.z = 30;
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-        var dirLight = new THREE.DirectionalLight(0xffffff);
+        let dirLight = new THREE.DirectionalLight(0xffffff);
         dirLight.position.set(30, 30, 30);
         dirLight.intensity = 0.8;
         scene.add(dirLight);
 
         // add spotlight for the shadows
-        var spotLight = new THREE.SpotLight(0xffffff);
+        let spotLight = new THREE.SpotLight(0xffffff);
         spotLight.castShadow = true;
         spotLight.position.set(-30, 30, -100);
         spotLight.target.position.x = -10;
@@ -86,10 +86,10 @@
         spotLight.shadowCameraFar = 200;
 
         scene.add(spotLight);
-        var plane = new THREE.BoxGeometry(1600, 1600, 0.1, 40, 40);
+        let plane = new THREE.BoxGeometry(1600, 1600, 0.1, 40, 40);
 
 
-        var cube = new THREE.Mesh(plane, new THREE.MeshPhongMaterial(
+        let cube = new THREE.Mesh(plane, new THREE.MeshPhongMaterial(
                 {
                     color: 0xffffff,
                     map: THREE.ImageUtils.loadTexture("../assets/textures/general/floor-wood.jpg"),
@@ -106,12 +106,12 @@
         cube.position.x = -150;
         scene.add(cube);
 
-        var range = 3;
-        var stepX = 8;
-        var stepZ = 8;
-        for (var i = -25; i < 5; i++) {
-            for (var j = -15; j < 15; j++) {
-                var cube = new THREE.Mesh(new THREE.BoxGeometry(3, 4, 3),
+        let range = 3;
+        let stepX = 8;
+        let stepZ = 8;
+        for (let i = -25; i < 5; i++) {
+            for (let j = -15; j < 15; j++) {
+                let cube = new THREE.Mesh(new THREE.BoxGeometry(3, 4, 3),
                         new THREE.MeshPhongMaterial(
                                 {
                                     color: scale(Math.random()).hex(),
@@ -132,23 +132,23 @@
 
         // create the shaders
         // overlay of black and white
-        var bleachFilter = new THREE.ShaderPass(THREE.BleachBypassShader);
+        let bleachFilter = new THREE.ShaderPass(THREE.BleachBypassShader);
         bleachFilter.enabled = false;
 
-        var edgeShader = new THREE.ShaderPass(THREE.EdgeShader);
+        let edgeShader = new THREE.ShaderPass(THREE.EdgeShader);
         edgeShader.enabled = false;
 
-        var FXAAShader = new THREE.ShaderPass(THREE.FXAAShader);
+        let FXAAShader = new THREE.ShaderPass(THREE.FXAAShader);
         FXAAShader.enabled = false;
 
-        var focusShader = new THREE.ShaderPass(THREE.FocusShader);
+        let focusShader = new THREE.ShaderPass(THREE.FocusShader);
         focusShader.enabled = false;
 
-        var renderPass = new THREE.RenderPass(scene, camera);
-        var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
+        let renderPass = new THREE.RenderPass(scene, camera);
+        let effectCopy = new THREE.ShaderPass(THREE.CopyShader);
         effectCopy.renderToScreen = true;
 
-        var composer = new THREE.EffectComposer(webGLRenderer);
+        let composer = new THREE.EffectComposer(webGLRenderer);
         composer.addPass(renderPass);
         composer.addPass(bleachFilter);
         composer.addPass(edgeShader);
@@ -156,7 +156,7 @@
         composer.addPass(focusShader);
         composer.addPass(effectCopy);
 
-        var controls = new function () {
+        let controls = new function () {
 
             this.bleachOpacity = 1;
             this.bleach = false;
@@ -190,7 +190,7 @@
 
         };
 
-        var gui = new dat.GUI();
+        let gui = new dat.GUI();
         gui.add(controls, 'bleach').onChange(controls.onChange);
         gui.add(controls, 'bleachOpacity', 0, 2).onChange(controls.onChange);
         gui.add(controls, 'edgeDetect').onChange(controls.onChange);
@@ -217,7 +217,7 @@
 
         function initStats() {
 
-            var stats = new Stats();
+            let stats = new Stats();
             stats.setMode(0); // 0: fps, 1: ms
 
 

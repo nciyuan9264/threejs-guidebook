@@ -1,9 +1,9 @@
 function init() {
 
   // setup the scene for rendering
-  var camera = initCamera(new THREE.Vector3(50, 50, 50));  
-  var loaderScene = new BaseLoaderScene(camera, false);
-  var sun = new THREE.DirectionalLight(0xffffff);
+  let camera = initCamera(new THREE.Vector3(50, 50, 50));  
+  let loaderScene = new BaseLoaderScene(camera, false);
+  let sun = new THREE.DirectionalLight(0xffffff);
   sun.position.set(300, 100, 100);
 
   loaderScene.scene.add(sun)
@@ -11,10 +11,10 @@ function init() {
   // AOMAP depends on the presence of an ambientlight
   loaderScene.scene.add(new THREE.AmbientLight(0xffffff, 0.2))
 
-  var loader = new THREE.JSONLoader();
-  var textureLoader = new THREE.TextureLoader();
-  var gui = new dat.GUI();
-  var controls = {
+  let loader = new THREE.JSONLoader();
+  let textureLoader = new THREE.TextureLoader();
+  let gui = new dat.GUI();
+  let controls = {
     aoMapIntenisty: 1
   };
 
@@ -25,7 +25,7 @@ function init() {
     geometry.normalsNeedUpdate = true;
     geometry.faceVertexUvs.push(geometry.faceVertexUvs[0]);
 
-    var material = new THREE.MeshStandardMaterial({
+    let material = new THREE.MeshStandardMaterial({
       aoMap: textureLoader.load("../../assets/models/baymax/ambient.png"),
       aoMapIntensity: 2,
       color: 0xffffff,
@@ -33,8 +33,8 @@ function init() {
       roughness: 1
     });
 
-    // var material = new THREE.MeshNormalMaterial();
-    var mesh = new THREE.Mesh(geometry, material);
+    // let material = new THREE.MeshNormalMaterial();
+    let mesh = new THREE.Mesh(geometry, material);
     mesh.scale.set(20, 20, 20);
     mesh.translateY(-50);
 

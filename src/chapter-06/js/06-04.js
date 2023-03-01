@@ -1,21 +1,21 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   // and add some simple default lights
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
   initDefaultLighting(scene);
-  var groundPlane = addLargeGroundPlane(scene)
+  let groundPlane = addLargeGroundPlane(scene)
   groundPlane.position.y = -30;
 
-  var step = 0;
-  var spGroup;
+  let step = 0;
+  let spGroup;
 
   // setup the control gui
-  var controls = new function () {
+  let controls = new function () {
 
     this.appliedMaterial = applyMeshNormalMaterial
     this.castShadow = true;
@@ -30,11 +30,11 @@ function init() {
     // we need the first child, since it's a multimaterial
 
     this.newPoints = function () {
-      var points = [];
-      for (var i = 0; i < controls.numberOfPoints; i++) {
-        var randomX = -20 + Math.round(Math.random() * 50);
-        var randomY = -15 + Math.round(Math.random() * 40);
-        var randomZ = -20 + Math.round(Math.random() * 40);
+      let points = [];
+      for (let i = 0; i < controls.numberOfPoints; i++) {
+        let randomX = -20 + Math.round(Math.random() * 50);
+        let randomY = -15 + Math.round(Math.random() * 40);
+        let randomZ = -20 + Math.round(Math.random() * 40);
 
         points.push(new THREE.Vector3(randomX, randomY, randomZ));
       }
@@ -51,7 +51,7 @@ function init() {
 
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'newPoints');
   gui.add(controls, 'numberOfPoints', 2, 15).step(1).onChange(controls.newPoints);
   gui.add(controls, 'segments', 0, 200).step(1).onChange(controls.redraw);
@@ -78,14 +78,14 @@ function init() {
 
     if (spGroup) scene.remove(spGroup)
     spGroup = new THREE.Object3D();
-    var material = new THREE.MeshBasicMaterial({
+    let material = new THREE.MeshBasicMaterial({
       color: 0xff0000,
       transparent: false
     });
     points.forEach(function (point) {
 
-      var spGeom = new THREE.SphereGeometry(0.2);
-      var spMesh = new THREE.Mesh(spGeom, material);
+      let spGeom = new THREE.SphereGeometry(0.2);
+      let spMesh = new THREE.Mesh(spGeom, material);
       spMesh.position.copy(point);
       spGroup.add(spMesh);
     });

@@ -4,11 +4,11 @@ function init() {
   Physijs.scripts.ammo = './ammo.js';
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera(new THREE.Vector3(10, 10, 10));
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera(new THREE.Vector3(10, 10, 10));
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
   scene = new Physijs.Scene({reportSize: 10, fixedTimeStep: 1 / 60});
   scene.setGravity(new THREE.Vector3(0, -10, 0));
 
@@ -27,7 +27,7 @@ function init() {
   render();
   function render() {
     stats.update();
-    var delta = clock.getDelta();
+    let delta = clock.getDelta();
     trackballControls.update(delta);
     requestAnimationFrame(render);
     renderer.render(scene, camera);
@@ -37,19 +37,19 @@ function init() {
 
 function createPointToPoint(scene) {
 
-  var beads = [];
-  var rangeMin = -10;
-  var rangeMax = 10;
-  var count = 20;
-  var scale = chroma.scale(['red', 'yellow']);
+  let beads = [];
+  let rangeMin = -10;
+  let rangeMax = 10;
+  let count = 20;
+  let scale = chroma.scale(['red', 'yellow']);
 
-  for (var i = 0 ; i < count ; i++) {
-    var bead = new THREE.SphereGeometry(0.5);
-    var physBead = new Physijs.SphereMesh(bead, Physijs.createMaterial(new THREE.MeshStandardMaterial({color: scale(Math.random()).hex()}), 0, 0)); 
+  for (let i = 0 ; i < count ; i++) {
+    let bead = new THREE.SphereGeometry(0.5);
+    let physBead = new Physijs.SphereMesh(bead, Physijs.createMaterial(new THREE.MeshStandardMaterial({color: scale(Math.random()).hex()}), 0, 0)); 
     physBead.position.set(i * (-rangeMin + rangeMax)/count + rangeMin, 10, Math.random()/2);
     scene.add(physBead);
     if (i != 0) {
-      var beadConstraint = new Physijs.PointConstraint(beads[i-1], physBead, physBead.position);
+      let beadConstraint = new Physijs.PointConstraint(beads[i-1], physBead, physBead.position);
       scene.addConstraint(beadConstraint);
     }
     physBead.castShadow = true;

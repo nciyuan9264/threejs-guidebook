@@ -1,18 +1,18 @@
 function init() {
 
   // setup the scene for rendering
-  var camera = initCamera(new THREE.Vector3(50, 50, 50));  
-  var loaderScene = new BaseLoaderScene(camera);
+  let camera = initCamera(new THREE.Vector3(50, 50, 50));  
+  let loaderScene = new BaseLoaderScene(camera);
   camera.lookAt(new THREE.Vector3(0, 15, 0));
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
 
 
-  var loader = new THREE.ObjectLoader();
-  var textureLoader = new THREE.TextureLoader();
+  let loader = new THREE.ObjectLoader();
+  let textureLoader = new THREE.TextureLoader();
   loader.load("../../assets/models/lightmap/lightmap.json", function (sceneGroup) {
     sceneGroup.scale.set(7,7,7);
-    var plane = sceneGroup.getObjectByName("Plane")
+    let plane = sceneGroup.getObjectByName("Plane")
     plane.geometry.faceVertexUvs.push(plane.geometry.faceVertexUvs[0]);
     plane.material = new THREE.MeshBasicMaterial({
       map: textureLoader.load("../../assets/textures/general/floor-wood.jpg"),
@@ -20,13 +20,13 @@ function init() {
     });
 
     // add some color and a different material to the head
-    var suzanne = sceneGroup.getObjectByName("Suzanne")
+    let suzanne = sceneGroup.getObjectByName("Suzanne")
     suzanne.geometry.computeVertexNormals();
     suzanne.geometry.computeFaceNormals();
     suzanne.geometry.normalsNeedUpdate = true;
     suzanne.material = new THREE.MeshStandardMaterial({color: 0x445566});
     
-    var controls = {
+    let controls = {
       lightMapIntensity: 1
     };
 

@@ -1,30 +1,30 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var webGLRenderer = initRenderer();
-  var stats = initStats();
+  let stats = initStats();
+  let webGLRenderer = initRenderer();
+  let stats = initStats();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
-  var sceneOrtho = new THREE.Scene();
+  let scene = new THREE.Scene();
+  let sceneOrtho = new THREE.Scene();
 
   // create a camera, which defines where we're looking at.
-  var camera = initCamera(new THREE.Vector3(0, 0, 50));
-  var cameraOrtho = new THREE.OrthographicCamera(0, window.innerWidth, window.innerHeight, 0, -10, 10);
+  let camera = initCamera(new THREE.Vector3(0, 0, 50));
+  let cameraOrtho = new THREE.OrthographicCamera(0, window.innerWidth, window.innerHeight, 0, -10, 10);
 
-  var material = new THREE.MeshNormalMaterial();
-  var geom = new THREE.SphereGeometry(15, 20, 20);
-  var mesh = new THREE.Mesh(geom, material);
+  let material = new THREE.MeshNormalMaterial();
+  let geom = new THREE.SphereGeometry(15, 20, 20);
+  let mesh = new THREE.Mesh(geom, material);
 
   scene.add(mesh);
 
-  var getTexture = function () {
-    var texture = new THREE.TextureLoader().load("../../assets/textures/particles/sprite-sheet.png");
+  let getTexture = function () {
+    let texture = new THREE.TextureLoader().load("../../assets/textures/particles/sprite-sheet.png");
     return texture;
   };
 
-  var controls = new function () {
+  let controls = new function () {
     this.size = 150;
     this.sprite = 0;
     this.transparent = true;
@@ -40,7 +40,7 @@ function init() {
     };
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'sprite', 0, 4).step(1).onChange(controls.redraw);
   gui.add(controls, 'size', 0, 120).onChange(controls.redraw);
   gui.add(controls, 'transparent').onChange(controls.redraw);
@@ -53,7 +53,7 @@ function init() {
   render();
 
   function createSprite(size, transparent, opacity, color, spriteNumber) {
-    var spriteMaterial = new THREE.SpriteMaterial({
+    let spriteMaterial = new THREE.SpriteMaterial({
       opacity: opacity,
       color: color,
       transparent: transparent,
@@ -67,7 +67,7 @@ function init() {
     // make sure the object is always rendered at the front
     spriteMaterial.depthTest = false;
     
-    var sprite = new THREE.Sprite(spriteMaterial);
+    let sprite = new THREE.Sprite(spriteMaterial);
     sprite.scale.set(size, size, size);
     sprite.position.set(100, 50, -10);
     sprite.velocityX = 5;
@@ -76,7 +76,7 @@ function init() {
   }
 
 
-  var step = 0;
+  let step = 0;
 
   function render() {
 

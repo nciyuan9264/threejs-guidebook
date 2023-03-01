@@ -4,11 +4,11 @@ function init() {
   Physijs.scripts.ammo = './ammo.js';
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera(new THREE.Vector3(10, 10, 10));
-  var trackballControls = initTrackballControls(camera, renderer);
-  var clock = new THREE.Clock();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera(new THREE.Vector3(10, 10, 10));
+  let trackballControls = initTrackballControls(camera, renderer);
+  let clock = new THREE.Clock();
   scene = new Physijs.Scene({reportSize: 10, fixedTimeStep: 1 / 60});
   scene.setGravity(new THREE.Vector3(0, -10, 0));
 
@@ -21,7 +21,7 @@ function init() {
   render();
   function render() {
     stats.update();
-    var delta = clock.getDelta();
+    let delta = clock.getDelta();
     trackballControls.update(delta);
     requestAnimationFrame(render);
     renderer.render(scene, camera);

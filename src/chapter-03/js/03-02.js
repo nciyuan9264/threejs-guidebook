@@ -1,35 +1,35 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
-  var scene = new THREE.Scene();
+  let scene = new THREE.Scene();
 
-  var cubeAndSphere = addDefaultCubeAndSphere(scene);
-  var cube = cubeAndSphere.cube;
-  var sphere = cubeAndSphere.sphere;
-  var plane = addGroundPlane(scene);
+  let cubeAndSphere = addDefaultCubeAndSphere(scene);
+  let cube = cubeAndSphere.cube;
+  let sphere = cubeAndSphere.sphere;
+  let plane = addGroundPlane(scene);
   
 
   // add subtle ambient lighting
-  var ambiColor = "#1c1c1c";
-  var ambientLight = new THREE.AmbientLight(ambiColor);
+  let ambiColor = "#1c1c1c";
+  let ambientLight = new THREE.AmbientLight(ambiColor);
   scene.add(ambientLight);
 
   // add spotlight for a bit of light
-  var spotLight0 = new THREE.SpotLight(0xcccccc);
+  let spotLight0 = new THREE.SpotLight(0xcccccc);
   spotLight0.position.set(-40, 30, -10);
   spotLight0.lookAt(plane);
   scene.add(spotLight0);
 
   // add target and light
-  var target = new THREE.Object3D();
+  let target = new THREE.Object3D();
   target.position = new THREE.Vector3(5, 0, 0);
 
-  var spotLight = new THREE.SpotLight("#ffffff");
+  let spotLight = new THREE.SpotLight("#ffffff");
   spotLight.position.set(-40, 60, -10);
   spotLight.castShadow = true;
   spotLight.shadow.camera.near = 1;
@@ -39,28 +39,28 @@ function init() {
   spotLight.angle = 0.4;
   spotLight.shadow.camera.fov = 120;
   scene.add(spotLight);
-  var debugCamera = new THREE.CameraHelper(spotLight.shadow.camera);
+  let debugCamera = new THREE.CameraHelper(spotLight.shadow.camera);
 
-  var pp = new THREE.SpotLightHelper(spotLight)
+  let pp = new THREE.SpotLightHelper(spotLight)
   scene.add(pp)
 
   // add a small sphere simulating the pointlight
-  var sphereLight = new THREE.SphereGeometry(0.2);
-  var sphereLightMaterial = new THREE.MeshBasicMaterial({
+  let sphereLight = new THREE.SphereGeometry(0.2);
+  let sphereLightMaterial = new THREE.MeshBasicMaterial({
     color: 0xac6c25
   });
-  var sphereLightMesh = new THREE.Mesh(sphereLight, sphereLightMaterial);
+  let sphereLightMesh = new THREE.Mesh(sphereLight, sphereLightMaterial);
   sphereLightMesh.castShadow = true;
 
   sphereLightMesh.position = new THREE.Vector3(3, 20, 3);
   scene.add(sphereLightMesh);
 
   // for controlling the rendering
-  var step = 0;
-  var invert = 1;
-  var phase = 0;
+  let step = 0;
+  let invert = 1;
+  let phase = 0;
 
-  var controls = setupControls();
+  let controls = setupControls();
   render();
 
   function render() {
@@ -88,7 +88,7 @@ function init() {
       sphereLightMesh.position.y = 15;
 
       if (invert < 0) {
-        var pivot = 14;
+        let pivot = 14;
         sphereLightMesh.position.x = (invert * (sphereLightMesh.position.x - pivot)) + pivot;
       }
 
@@ -102,7 +102,7 @@ function init() {
   }
 
   function setupControls() {
-    var controls = new function () {
+    let controls = new function () {
       this.rotationSpeed = 0.03;
       this.bouncingSpeed = 0.03;
       this.ambientColor = ambiColor;
@@ -117,7 +117,7 @@ function init() {
       this.penumbra = 0;
     };
 
-    var gui = new dat.GUI();
+    let gui = new dat.GUI();
     gui.addColor(controls, 'ambientColor').onChange(function (e) {
       ambientLight.color = new THREE.Color(e);
     });

@@ -1,19 +1,19 @@
 function init() {
 
   // use the defaults
-  var stats = initStats();
-  var renderer = initRenderer();
-  var camera = initCamera();
-  var scene = new THREE.Scene();
+  let stats = initStats();
+  let renderer = initRenderer();
+  let camera = initCamera();
+  let scene = new THREE.Scene();
   initDefaultLighting(scene);
-  var groundPlane = addLargeGroundPlane(scene)
+  let groundPlane = addLargeGroundPlane(scene)
   groundPlane.position.y = -30;
 
   // call the render function
-  var step = 0;
+  let step = 0;
 
   // setup the control gui
-  var controls = new function () {
+  let controls = new function () {
 
     this.appliedMaterial = applyMeshNormalMaterial
     this.castShadow = true;
@@ -31,7 +31,7 @@ function init() {
     // redraw function, updates the control UI and recreates the geometry.
     this.redraw = function () {
       redrawGeometryAndUpdateUI(gui, scene, controls, function() {
-        var options = {
+        let options = {
           amount: controls.amount,
           bevelThickness: controls.bevelThickness,
           bevelSize: controls.bevelSize,
@@ -41,7 +41,7 @@ function init() {
           steps: controls.steps
         };
   
-        var geom = new THREE.ExtrudeGeometry(drawShape(), options)
+        let geom = new THREE.ExtrudeGeometry(drawShape(), options)
         geom.applyMatrix(new THREE.Matrix4().makeScale(0.05,0.05,0.05));
         geom.center();
 
@@ -50,7 +50,7 @@ function init() {
     };
   };
 
-  var gui = new dat.GUI();
+  let gui = new dat.GUI();
   gui.add(controls, 'amount', 0, 20).onChange(controls.redraw);
   gui.add(controls, 'bevelThickness', 0, 10).onChange(controls.redraw);
   gui.add(controls, 'bevelSize', 0, 10).onChange(controls.redraw);
@@ -71,9 +71,9 @@ function init() {
 
   function drawShape() {
 
-    var svgString = document.querySelector("#batman-path").getAttribute("d");
+    let svgString = document.querySelector("#batman-path").getAttribute("d");
 
-    var shape = transformSVGPathExposed(svgString);
+    let shape = transformSVGPathExposed(svgString);
 
     // return the shape
     return shape;
@@ -81,7 +81,7 @@ function init() {
 
   
 
-  var step = 0;
+  let step = 0;
   controls.redraw();
   render();
   
